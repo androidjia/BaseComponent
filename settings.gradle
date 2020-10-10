@@ -1,2 +1,3 @@
+include ':datalibrary'
 include ':app'
 rootProject.name = "BaseComponent"
