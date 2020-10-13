@@ -1,10 +1,15 @@
 package com.jjs.zero.basecomponent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import com.jjs.zero.basecomponent.databinding.ActivityMainBinding;
+import com.jjs.zero.basecomponent.utils.NotificationUtils;
 import com.jjs.zero.datalibrary.DataManager;
 import com.jjs.zero.datalibrary.entity.User;
 
@@ -17,11 +22,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-
+    ActivityMainBinding binding;
+    private int progress = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 //        DataBases.getInstance(this).userDao().
 //                insertUsers(new User("123456","张三2"))
 //                .subscribe(new CompletableObserver() {
@@ -66,6 +73,30 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("zero=========","onError:");
                     }
                 });
+
+//        NotificationUtils.getInstance(this).createNotification("这是标题","jisdfjlksjfklsdjflksjdflksjfklsjfdlksdjflksjflksdjlksdfd士大夫撒旦法发达的第三方士大夫fsdfsdfsdff",
+//                NotificationUtils.NotificationStatus.LARGE,MainActivity2.class,1);
+
+
+//        int noId = 100;
+//        NotificationCompat.Builder builder = NotificationUtils.getInstance(this).getProgressBuilder("下载标题","下载内容",100);
+
+        binding.tv.setOnClickListener(view -> {
+//            NotificationUtils.getInstance(this).createNotification("这是第二个标题","gengduododsfdklasdjfsdjfklsdjfklsjf",
+//                    NotificationUtils.NotificationStatus.LARGE,MainActivity2.class,2);
+
+
+
+            //创建进度条通知
+//            NotificationUtils.getInstance(this).createProgressNotification(builder,noId,100,progress);
+
+            progress += 10;
+
+            NotificationUtils.getInstance(this).createCustomNotification(this,"biaoti","benbds");
+            Log.i("zero","点击了"+progress);
+        });
+
+
 
     }
 }
