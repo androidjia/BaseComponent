@@ -15,4 +15,4 @@
 **/build
 **/.gradle/
 **/build.gradle
-.idea
+/.idea

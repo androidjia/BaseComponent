@@ -5,13 +5,16 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.jjs.zero.basecomponent.databinding.ActivityMainBinding;
 import com.jjs.zero.basecomponent.utils.NotificationUtils;
 import com.jjs.zero.datalibrary.DataManager;
 import com.jjs.zero.datalibrary.entity.User;
+import com.jjs.zero.servicelibrary.TestActivity;
 
 
 import java.util.List;
@@ -96,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
             Log.i("zero","点击了"+progress);
         });
 
-
+        binding.tvService.setOnClickListener(view -> {
+            startActivity(new Intent(this, TestActivity.class));
+        });
 
     }
 }
