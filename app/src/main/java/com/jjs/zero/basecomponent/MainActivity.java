@@ -103,5 +103,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, TestActivity.class));
         });
 
+        binding.tvView.setOnClickListener(view -> {
+            startActivity(new Intent(this, ViewActivity.class));
+        });
+
     }
 }
