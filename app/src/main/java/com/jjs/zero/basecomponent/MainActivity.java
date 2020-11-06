@@ -1,20 +1,18 @@
 package com.jjs.zero.basecomponent;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.jjs.zero.basecomponent.databinding.ActivityMainBinding;
 import com.jjs.zero.basecomponent.utils.NotificationUtils;
 import com.jjs.zero.datalibrary.DataManager;
 import com.jjs.zero.datalibrary.entity.User;
 import com.jjs.zero.servicelibrary.TestActivity;
+import com.jjs.zero.viewlibrary.ViewActivity;
 
 
 import java.util.List;

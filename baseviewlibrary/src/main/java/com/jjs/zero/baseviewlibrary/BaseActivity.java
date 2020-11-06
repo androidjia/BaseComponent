@@ -122,7 +122,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
             loadingFragment = null;
         }
         loadingFragment = new LoadingFragment();
-        loadingFragment.show(getFragmentManager(),LoadingFragment.class.getName());
+        loadingFragment.show(getSupportFragmentManager(),LoadingFragment.class.getName());
     }
 
     public void hideLoading() {

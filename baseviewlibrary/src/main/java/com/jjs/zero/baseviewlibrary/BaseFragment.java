@@ -96,7 +96,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
             loadingView = null;
         }
         loadingView = new LoadingFragment();
-        loadingView.show(getActivity().getFragmentManager(),LoadingFragment.class.getName());
+        loadingView.show(getActivity().getSupportFragmentManager(),LoadingFragment.class.getName());
     }
 
     /**
