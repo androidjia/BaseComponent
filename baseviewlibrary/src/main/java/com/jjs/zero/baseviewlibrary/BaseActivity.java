@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -45,17 +46,19 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(layoutResId());
-        mToolbar.setBackgroundColor(ContextCompat.getColor(mContext,setToolBarAndStatusBarColor()));
     }
 
     @Override
     public void setContentView(int layoutResID) {
         mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base,null,false);
         viewBinding = DataBindingUtil.inflate(getLayoutInflater(),layoutResID,null,false);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
-        mContainer.addView(viewBinding.getRoot(),params);
-        setViewMargin(mContainer);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
+//        mContainer.addView(viewBinding.getRoot(),params);
+//        RelativeLayout mContainer = ;
+        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.MATCH_PARENT);
+        mBaseBinding.container.addView(viewBinding.getRoot(),params);
+//        setViewMargin(mContainer);
         getWindow().setContentView(mBaseBinding.getRoot());
         setToolBar();
         initData();
@@ -69,12 +72,12 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
      * 设置子布局距离父布局的位置
      * @param mContainer
      */
-    protected void setViewMargin(RelativeLayout mContainer) {
+//    protected void setViewMargin(RelativeLayout mContainer) {
 //        Log.i("zero","titleAndStatus:"+StatusBarUtils.getTitleAndStatusBarHeight(BaseActivity.this) + " statusBar:"+StatusBarUtils.getStatusBarHeight(BaseActivity.this));
 //        ConstraintLayout.LayoutParams param = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //        param.topMargin = StatusBarUtils.getTitleAndStatusBarHeight(BaseActivity.this);
 //        mContainer.setLayoutParams(param);
-    }
+//    }
 
     //加载数据
     protected abstract void initData();
@@ -96,8 +99,8 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 
     private void setToolBar() {
         mToolbar = mBaseBinding.toolBar;
+        mToolbar.setBackgroundColor(ContextCompat.getColor(mContext,setToolBarAndStatusBarColor()));
         setSupportActionBar(mToolbar);
-
         mBaseBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

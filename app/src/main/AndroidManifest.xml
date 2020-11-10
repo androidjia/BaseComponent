@@ -3,12 +3,27 @@
     package="com.jjs.zero.basecomponent">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- android 8.0 安装app需要此权限 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+    <!-- android 9.0 网络权限 usesCleartextTraffic 在api28以下默认为true 当属性设置为“false”时，
+    平台组件（例如，HTTP和FTP堆栈，DownloadManager和MediaPlayer）将拒绝应用程序使用明文流量的请求-->
+<!--    <uses-library android:name="org.apache.http.legacy" android:required="false"/>-->
+<!--   9.0 当手机处于亮屏状态时, 会显示一个通知栏, 当手机处于锁屏或者灭屏状态时，会亮屏并直接进入到CallActivity中-->
+<!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
+
+    <!-- 兼容10.0系统，允许App在后台获得位置信息 -->
+<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
+
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">

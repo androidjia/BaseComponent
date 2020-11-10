@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.content.FileProvider;
@@ -25,6 +26,8 @@ import static android.content.Context.DOWNLOAD_SERVICE;
  *   Android 7.0 需要fileProvider
  */
 public class DownloadManagerUtil {
+
+    public static final int REQUEST_CODE_UNKNOWN_APP = 0x11;
 
     private Activity mActivity;
     private DownloadManager mDownloadManager;
@@ -67,6 +70,25 @@ public class DownloadManagerUtil {
         mActivity.registerReceiver(this.mDownloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
+    private void installApk(String apkPath) {
+        //andorid 8.0要判断权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            boolean hasInstallPermission = mActivity.getPackageManager().canRequestPackageInstalls();
+
+            if (hasInstallPermission) {
+                promptInstall(apkPath);
+            } else {
+                //跳转至“安装未知应用”权限界面，引导用户开启权限
+                Uri selfPackageUri = Uri.parse("package:" + mActivity.getPackageName());
+                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, selfPackageUri);
+                mActivity.startActivityForResult(intent, REQUEST_CODE_UNKNOWN_APP);
+            }
+        } else {
+            promptInstall(apkPath);
+        }
+    }
+
+
     private void promptInstall(String data) {
         Intent promptInstall = new Intent(Intent.ACTION_VIEW);
         promptInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -105,7 +127,8 @@ public class DownloadManagerUtil {
                             int fileNameIdx = c.getColumnIndex("local_filename");
                             fileName = c.getString(fileNameIdx);
                         }
-                        downloadManagerUtil.promptInstall(fileName);
+                        downloadManagerUtil.installApk(fileName);
+//                        downloadManagerUtil.promptInstall(fileName);
                     }
                 }
 
