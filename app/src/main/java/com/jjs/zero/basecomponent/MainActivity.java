@@ -3,18 +3,17 @@ package com.jjs.zero.basecomponent;
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 
 import com.jjs.zero.basecomponent.databinding.ActivityMainBinding;
-import com.jjs.zero.basecomponent.utils.NotificationUtils;
-import com.jjs.zero.basecomponent.utils.PermissionRequestUtils;
-import com.jjs.zero.basecomponent.utils.PermissionUtils;
-import com.jjs.zero.basecomponent.utils.StatusBarUtils;
 import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.datalibrary.DataManager;
 import com.jjs.zero.datalibrary.entity.User;
 import com.jjs.zero.servicelibrary.TestActivity;
+import com.jjs.zero.utilslibrary.utils.NotificationUtils;
+import com.jjs.zero.utilslibrary.utils.PermissionRequestUtils;
+import com.jjs.zero.utilslibrary.utils.PermissionUtils;
+import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
 import com.jjs.zero.viewlibrary.ViewActivity;
 
 
@@ -123,9 +122,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
 
 //          状态栏设置
-//        StatusBarUtils.setStatusBarColorDark(this,true);
+        StatusBarUtils.setStatusBarColorDark(this,true);
 //        StatusBarUtils.setStatusBarColor(this, Color.BLUE);
-//        setTitle(StatusBarUtils.statusBarHight(this)+"高度");
+        setTitle("statusBar:"+StatusBarUtils.statusBarHeight(this)+"  title:"+StatusBarUtils.titleBarHeight(this));
+
     }
 
     @Override

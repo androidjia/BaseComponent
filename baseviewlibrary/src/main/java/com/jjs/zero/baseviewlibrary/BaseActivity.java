@@ -3,6 +3,7 @@ package com.jjs.zero.baseviewlibrary;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 
     @Override
     public void setContentView(int layoutResID) {
-        mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base,null,false);
+        mBaseBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_base,null,false);
         viewBinding = DataBindingUtil.inflate(getLayoutInflater(),layoutResID,null,false);
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //        RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
@@ -58,7 +59,6 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 //        RelativeLayout mContainer = ;
         ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.MATCH_PARENT);
         mBaseBinding.container.addView(viewBinding.getRoot(),params);
-//        setViewMargin(mContainer);
         getWindow().setContentView(mBaseBinding.getRoot());
         setToolBar();
         initData();
@@ -69,15 +69,24 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     }
 
     /**
-     * 设置子布局距离父布局的位置
-     * @param mContainer
+     * 获取父布局
+     *
+     *
+     * @return
      */
-//    protected void setViewMargin(RelativeLayout mContainer) {
-//        Log.i("zero","titleAndStatus:"+StatusBarUtils.getTitleAndStatusBarHeight(BaseActivity.this) + " statusBar:"+StatusBarUtils.getStatusBarHeight(BaseActivity.this));
-//        ConstraintLayout.LayoutParams param = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        param.topMargin = StatusBarUtils.getTitleAndStatusBarHeight(BaseActivity.this);
-//        mContainer.setLayoutParams(param);
-//    }
+    protected ConstraintLayout getParentView(){
+        return mBaseBinding.container;
+    }
+
+    /**
+     * 设置根布局距离父布局的位置
+     * @param
+     */
+    protected void setRootViewMarginTop(int marginTop) {
+        ConstraintLayout.LayoutParams param = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        param.topMargin = marginTop;
+        mBaseBinding.container.setLayoutParams(param);
+    }
 
     //加载数据
     protected abstract void initData();

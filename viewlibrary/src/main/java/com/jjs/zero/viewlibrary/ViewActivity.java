@@ -1,5 +1,6 @@
 package com.jjs.zero.viewlibrary;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.jjs.zero.baseviewlibrary.BaseActivity;
+import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
 import com.jjs.zero.viewlibrary.databinding.ActivityViewBinding;
 
 import io.alterac.blurkit.BlurKit;
@@ -78,6 +80,7 @@ public class ViewActivity extends BaseActivity<ActivityViewBinding> {
             @Override
             public void onClick(View view) {
                 viewBinding.tv12.setSelected(true);
+                startActivity(new Intent(mContext,View2Activity.class));
             }
         });
 
@@ -89,7 +92,9 @@ public class ViewActivity extends BaseActivity<ActivityViewBinding> {
         //开启向上按钮，manifest中有父activity的配置 androidx 貌似没有效果
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mToolbar.setBackgroundColor(Color.BLUE);
+        StatusBarUtils.setStatusBarColorDark(this,true);
+//        mToolbar.setBackgroundColor(Color.BLUE);
+        setRootViewMarginTop(20);
     }
 
     @Override

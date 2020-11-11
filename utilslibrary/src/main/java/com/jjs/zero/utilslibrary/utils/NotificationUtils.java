@@ -1,7 +1,5 @@
-package com.jjs.zero.basecomponent.utils;
+package com.jjs.zero.utilslibrary.utils;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,9 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.app.RemoteInput;
 
-import com.jjs.zero.basecomponent.R;
+import com.jjs.zero.utilslibrary.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -92,7 +89,7 @@ public class NotificationUtils {
 //               .build();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(content)
 //                .setOngoing(true)                                   //通知不会被清除掉，除非app killed
@@ -172,7 +169,7 @@ public class NotificationUtils {
                 .setContentTitle(title)
                 .setContentText(content)
 //                .setContentIntent(pendingIntent)                  //需要点击跳转添加
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setOnlyAlertOnce(true)
                 .setProgress(progressMax, 0, false); //第三个参数表示进度显示方式
@@ -195,7 +192,7 @@ public class NotificationUtils {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
 //                .setContentTitle("biaoti")
 //                .setContentText("wenben")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomContentView(notiView)

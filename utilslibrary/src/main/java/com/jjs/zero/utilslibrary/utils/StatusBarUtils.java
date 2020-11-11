@@ -1,8 +1,10 @@
-package com.jjs.zero.basecomponent.utils;
+package com.jjs.zero.utilslibrary.utils;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -44,7 +46,7 @@ public class StatusBarUtils {
             miuiSetStatusBarLightMode(activity.getWindow(),isDark);
             flymeSetStatusBarLightMode(activity.getWindow(),isDark);
         } else {
-            activity.getWindow().getDecorView().findViewById(android.R.id.content).setPadding(0, 0, 0, statusBarHight(activity));
+            activity.getWindow().getDecorView().findViewById(android.R.id.content).setPadding(0, 0, 0, statusBarHeight(activity));
         }
     }
 
@@ -121,11 +123,23 @@ public class StatusBarUtils {
      * 获取状态栏高度
      * @return
      */
-    public static int statusBarHight(Activity activity) {
+    public static int statusBarHeight(Activity activity) {
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         int height = resources.getDimensionPixelSize(resourceId);
         return height;
+    }
+
+    /**
+     * 获取标题栏
+     * @param activity
+     * @return
+     */
+    public static int titleBarHeight(Activity activity) {
+        TypedValue tv =new TypedValue();
+        int actionBarHeight = 0;
+        if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, activity.getResources().getDisplayMetrics());
+        return actionBarHeight;
     }
 
 

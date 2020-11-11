@@ -1,4 +1,4 @@
-package com.jjs.zero.basecomponent.utils;
+package com.jjs.zero.utilslibrary.utils;
 
 import android.Manifest;
 import android.os.Build;

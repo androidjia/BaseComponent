@@ -14,5 +14,5 @@
 .cxx
 **/build
 **/.gradle/
-**/build.gradle
+#**/build.gradle
 /.idea

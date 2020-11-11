@@ -1,0 +1,15 @@
+ext {
+    android = [
+            buildToolsVersion   : '29.0.3',
+            compileSdkVersion   : 29,
+            minSdkVersion       : 21,
+            targetSdkVersion    : 29
+    ]
+
+    dependencies = [
+            appcompat           : '1.2.0',
+            material            : '1.2.1',
+            constraintlayout    : '2.0.3'
+    ]
+
+}
