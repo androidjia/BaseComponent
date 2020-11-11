@@ -125,7 +125,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         StatusBarUtils.setStatusBarColorDark(this,true);
 //        StatusBarUtils.setStatusBarColor(this, Color.BLUE);
         setTitle("statusBar:"+StatusBarUtils.statusBarHeight(this)+"  title:"+StatusBarUtils.titleBarHeight(this));
-
     }
 
     @Override
