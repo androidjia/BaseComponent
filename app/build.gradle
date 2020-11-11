@@ -1,17 +1,24 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         applicationId "com.jjs.zero.basecomponent"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.2"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+//        //只支持中文
+//        resConfigs "zh"
+//        ndk {
+//            //设置支持的so库架构
+//            abiFilters "armeabi-v7a"
+//        }
     }
 
     dataBinding{
@@ -20,9 +27,48 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+//            //混淆
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
+//            签名
+//            signingConfig signingConfigs.defaultSign
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'domain', '"http://192.168.0.1:5555/MyProject/"'
         }
+
+
+        debug {
+            //混淆
+            minifyEnabled false
+            //            签名
+//            signingConfig signingConfigs.defaultSign
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'domain', '"http://192.168.0.1:8888/MyProject/"'
+        }
+
+        innerTest.initWith(buildTypes.debug)
+        innerTest{
+            buildConfigField 'String', 'domain', '"http://192.168.0.1:6666/MyProject/"'
+            matchingFallbacks = ['innerTest', 'debug', 'release']
+        }
+        //自定义构建版本
+//        dev.initWith(buildTypes.debug)
+//        dev {
+//            buildConfigField 'String', 'domain', '"http://192.168.0.1:7776/MyProject/"'
+//            matchingFallbacks = ['dev', 'debug', 'release']
+//        }
+
+//        但在 Gradle 3.0 下，如果你的 app 包含了新的自定义的 buildType，而依赖库中却没有相应的自定义 buildType，则编译阶段就会报错。
+//        解决方案一：在子模块中同样定义一个空pre{}类型
+//        解决方案二： matchingFallbacks，它可以指定在子模块中没找到对应的构建类型时要加载哪个类型
+//        pro.initWith(buildTypes.debug)
+//        pro {
+//            buildConfigField 'String', 'domain', '"http://192.168.0.1:3333/MyProject/"'
+//            matchingFallbacks = ['pro', 'debug', 'release']
+//        }
+
     }
     lintOptions {
         abortOnError false
@@ -32,15 +78,27 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def type = variant.buildType.name
+            def apkName = 'baseComponent_' + type + "_V" + versionName + '.apk'
+            output.outputFileName = apkName
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation project(':datalibrary')
+    implementation project(path: ':baseviewlibrary')
+    implementation project(path: ':viewlibrary')
+    implementation project(path: ':datalibrary')
+    implementation project(path: ':servicelibrary')
+    implementation project(path: ':utilslibrary')
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

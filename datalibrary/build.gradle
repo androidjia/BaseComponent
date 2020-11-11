@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
         javaCompileOptions {
@@ -42,10 +42,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     def room_version = "2.2.5"
 
