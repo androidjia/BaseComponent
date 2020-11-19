@@ -1,0 +1,111 @@
+package com.jjs.zero.baseviewlibrary.commonmodel;
+
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.jjs.zero.baseviewlibrary.BaseActivity;
+
+import java.util.List;
+
+/**
+ * @Author: jiajunshuai
+ * @CreateTime: 2020/11/18
+ * @Details: <功能描述>
+ */
+public abstract class BaseViewModel<D> extends ViewModel {
+    protected MutableLiveData<Integer> page = new MutableLiveData<>();
+    protected MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
+    protected MutableLiveData<Boolean> moreLoading = new MutableLiveData<>();
+    protected MutableLiveData<Boolean> hasMore = new MutableLiveData<>();
+    protected MutableLiveData<Boolean> autoRefresh = new MutableLiveData<>();
+
+    protected MutableLiveData<List<D>> liveData = new MutableLiveData<>();
+
+    protected String tips;
+    protected BaseActivity activity;
+
+    public BaseViewModel(){
+        refreshing.setValue(true);
+        moreLoading.setValue(false);
+        hasMore.setValue(true);
+        autoRefresh.setValue(false);
+    }
+
+    public BaseViewModel(BaseActivity activity){
+        this(activity,activity.getClass().getName());
+    }
+
+    public BaseViewModel(BaseActivity activity, String tips){
+        this.activity = activity;
+        this.tips = tips;
+        refreshing.setValue(true);
+        moreLoading.setValue(false);
+        hasMore.setValue(true);
+        autoRefresh.setValue(false);
+    }
+
+    public void onLoadMore() {
+        page.setValue(page.getValue()==null?page.getValue():0 +1);
+        refreshing.setValue(false);
+        moreLoading.setValue(true);
+    }
+
+    public void onRefresh() {
+        page.setValue(0);
+        refreshing.setValue(true);
+        moreLoading.setValue(false);
+    }
+
+    public void autoRefresh() {
+        autoRefresh.setValue(true);
+    }
+
+    public MutableLiveData<List<D>> getLiveData() {
+        return liveData;
+    }
+
+    public void setLiveData(MutableLiveData<List<D>> liveData) {
+        this.liveData = liveData;
+    }
+
+    public MutableLiveData<Integer> getPage() {
+        return page;
+    }
+
+    public void setPage(MutableLiveData<Integer> page) {
+        this.page = page;
+    }
+
+    public MutableLiveData<Boolean> getHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(MutableLiveData<Boolean> hasMore) {
+        this.hasMore = hasMore;
+    }
+
+    public MutableLiveData<Boolean> getRefreshing() {
+        return refreshing;
+    }
+
+    public void setRefreshing(MutableLiveData<Boolean> refreshing) {
+        this.refreshing = refreshing;
+    }
+
+    public MutableLiveData<Boolean> getMoreLoading() {
+        return moreLoading;
+    }
+
+    public void setMoreLoading(MutableLiveData<Boolean> moreLoading) {
+        this.moreLoading = moreLoading;
+    }
+
+    public MutableLiveData<Boolean> getAutoRefresh() {
+        return autoRefresh;
+    }
+
+    public void setAutoRefresh(MutableLiveData<Boolean> autoRefresh) {
+        this.autoRefresh = autoRefresh;
+    }
+
+}

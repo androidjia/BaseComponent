@@ -92,10 +92,25 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':baseviewlibrary')
     implementation project(path: ':viewlibrary')
-    implementation project(path: ':datalibrary')
+    implementation project(path: ':modellibrary')
     implementation project(path: ':servicelibrary')
     implementation project(path: ':utilslibrary')
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+
+//    def lifecycle_version ="2.2.0"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+
+
+
+    implementation  "com.scwang.smart:refresh-layout-kernel:${rootProject.ext.dependencies.smartRefreshLayout}"      //核心必须依赖
+//    implementation  "com.scwang.smart:refresh-header-classics:${rootProject.ext.dependencies.smartRefreshLayout}"    //经典刷新头
+//    implementation  "com.scwang.smart:refresh-header-radar:${rootProject.ext.dependencies.smartRefreshLayout}"       //雷达刷新头
+//    implementation  "com.scwang.smart:refresh-header-falsify:${rootProject.ext.dependencies.smartRefreshLayout}"     //虚拟刷新头
+    implementation  "com.scwang.smart:refresh-header-material:${rootProject.ext.dependencies.smartRefreshLayout}"    //谷歌刷新头
+//    implementation  "com.scwang.smart:refresh-header-two-level:${rootProject.ext.dependencies.smartRefreshLayout}"   //二级刷新头
+    implementation  "com.scwang.smart:refresh-footer-ball:${rootProject.ext.dependencies.smartRefreshLayout}"        //球脉冲加载
+//    implementation  "com.scwang.smart:refresh-footer-classics:${rootProject.ext.dependencies.smartRefreshLayout}"    //经典加载
 
 
 //    testImplementation 'junit:junit:4.12'

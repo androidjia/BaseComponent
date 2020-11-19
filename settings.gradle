@@ -1,3 +1,4 @@
+include ':modellibrary'
 include ':utilslibrary'
 include ':viewlibrary'
 include ':baseviewlibrary'

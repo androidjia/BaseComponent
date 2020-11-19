@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,7 +36,13 @@ android {
 dependencies {
 
     implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
-//    implementation 'com.google.android.material:material:1.2.1'
+    implementation "com.squareup.picasso:picasso:${rootProject.ext.dependencies.picasso}"
+
+
+
 //    微信
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.6.5'
+    //datastore-preferences 代替 SharedPreferences
+//    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+//    implementation "androidx.datastore:datastore-core:1.0.0-alpha02"
 }

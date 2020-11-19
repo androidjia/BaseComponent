@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -21,6 +22,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
@@ -29,7 +36,13 @@ import com.jjs.zero.viewlibrary.databinding.ActivityViewBinding;
 import io.alterac.blurkit.BlurKit;
 
 
-public class ViewActivity extends BaseActivity<ActivityViewBinding> {
+public class ViewActivity extends BaseActivity<ActivityViewBinding>{
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public int layoutResId() {
         return R.layout.activity_view;
@@ -41,6 +54,22 @@ public class ViewActivity extends BaseActivity<ActivityViewBinding> {
          * 1. viewgroup 中使用android:clipChildren="false" 不会裁剪子view
          * 2. text的drawable可以设置大小
          * 3. text SpannableString&SpannableStringBuilder定制文本
+         *
+         * 图片
+         * ColorDrawable
+         * NinePatchDrawable
+         * ShapeDrawable
+         * GradientDrawable
+         * BitmapDrawable
+         * InsertDrawable
+         * ClipDrawable
+         * RotateDrawable
+         * AnimationDrawable
+         * LayerDrawable
+         * TransitionDrawable
+         * LevelListDrawable
+         * StateListDrawable
+         *
          */
 
         Drawable[] drawables = viewBinding.tv12.getCompoundDrawables();
@@ -92,13 +121,20 @@ public class ViewActivity extends BaseActivity<ActivityViewBinding> {
         //开启向上按钮，manifest中有父activity的配置 androidx 貌似没有效果
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        StatusBarUtils.setStatusBarColorDark(this,true);
+//        StatusBarUtils.setStatusBarColorDark(this,true);
 //        mToolbar.setBackgroundColor(Color.BLUE);
-        setRootViewMarginTop(20);
+//        setRootViewMarginTop(20);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }

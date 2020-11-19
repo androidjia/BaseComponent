@@ -1,8 +1,10 @@
 package com.jjs.zero.utilslibrary.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.DisplayMetrics;
 
 /**
  * @Author: jiajunshuai
@@ -44,5 +46,18 @@ public class AppUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取屏幕宽度
+     * @param context
+     * @return
+     */
+    public static int getWidth(Activity context) {
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        int widthPixels = outMetrics.widthPixels;
+//        int heightPixels = outMetrics.heightPixels;
+        return widthPixels;
     }
 }

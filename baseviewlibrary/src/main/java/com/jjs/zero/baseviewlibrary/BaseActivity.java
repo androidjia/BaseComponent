@@ -3,13 +3,10 @@ package com.jjs.zero.baseviewlibrary;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +19,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
 import com.jjs.zero.baseviewlibrary.databinding.ActivityBaseBinding;
+import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
 
 
 /**
@@ -41,6 +42,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     private ActivityBaseBinding mBaseBinding;
     protected Toolbar mToolbar;
     protected Context mContext;
+
     public abstract int layoutResId();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     public void setContentView(int layoutResID) {
         mBaseBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_base,null,false);
         viewBinding = DataBindingUtil.inflate(getLayoutInflater(),layoutResID,null,false);
+        viewBinding.setLifecycleOwner(this);//lifecycle结合databinding只有在前台才会更新数据
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //        RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
 //        mContainer.addView(viewBinding.getRoot(),params);
@@ -106,9 +109,16 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
         return mBaseBinding.tvRight;
     }
 
+    protected ImageView getIvBack() {
+        return mBaseBinding.ivBack;
+    }
+
+
     private void setToolBar() {
         mToolbar = mBaseBinding.toolBar;
         mToolbar.setBackgroundColor(ContextCompat.getColor(mContext,setToolBarAndStatusBarColor()));
+        // 如果状态栏背景为白色，设置状态栏为深色
+        StatusBarUtils.setStatusBarColorDark(this,true);
         setSupportActionBar(mToolbar);
         mBaseBinding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +127,31 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
             }
         });
 
-
     }
 
     @Override
     public void setTitle(CharSequence title) {
         mBaseBinding.tvCenterTitle.setText(title);
+    }
+
+    /**
+     * 返回没有参数的viewModel
+     * @param t
+     * @param <T>
+     * @return
+     */
+    protected <T extends ViewModel> T createViewModel(Class<T> t) {
+        return new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(t);
+    }
+
+    /**
+     * 返回带参数的viewModel
+     * @param t
+     * @param <T>
+     * @return
+     */
+    protected <T extends ViewModel> T createViewModel(ViewModel t) {
+        return (T) new ViewModelProvider(this,new CommonViewModelFactory(t)).get(t.getClass());
     }
 
     public TextView getTitleView(){

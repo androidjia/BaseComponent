@@ -10,6 +10,13 @@
     <style name="AppTheme.NoActionBar" parent="BaseAppTheme">
     </style>
 
+    <!-- 启动白屏优化 -->
+    <style name="AppStartTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. 使用materialButton或materialCardView时要用material主题-->
         <item name="colorPrimary">@color/colorPrimary</item>

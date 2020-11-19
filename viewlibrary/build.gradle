@@ -42,8 +42,9 @@ dependencies {
     implementation project(path: ':baseviewlibrary')
     implementation project(path: ':utilslibrary')
     implementation 'io.alterac.blurkit:blurkit:1.1.1'
+//    implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
 
 
 //    testImplementation 'junit:junit:4.+'
