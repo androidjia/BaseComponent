@@ -93,3 +93,20 @@ v1.0.2
             viewpage+FragmentPagerAdapter+tablayout
             FragmentPagerAdapter:构造方法中添加 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
             FragmentTransaction：调用FragmentTransaction的setMaxLifecycle(fragment,Lifecycle.State.STARTED)
+            
+            
+        下载缓慢使用阿里镜像：
+            
+            maven {
+                        url "http://maven.aliyun.com/nexus/content/groups/public/"
+                    }
+        
+        或者：
+        
+            maven { url 'https://jitpack.io' }
+            maven { url 'https://maven.aliyun.com/repository/google' }
+            maven { url 'https://maven.aliyun.com/repository/jcenter' }
+            
+            
+            
+        
