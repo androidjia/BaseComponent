@@ -1,5 +1,6 @@
 package com.jjs.zero.baseviewlibrary.commonmodel;
 
+import androidx.annotation.CallSuper;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -103,8 +104,8 @@ public abstract class BaseViewModel<D> extends ViewModel {
     public void setAutoRefresh(MutableLiveData<Boolean> autoRefresh) {
         this.autoRefresh = autoRefresh;
     }
-
-
+    //重写父类的方法子类也需要调用时使用
+    @CallSuper
     @Override
     protected void onCleared() {
         super.onCleared();
