@@ -36,11 +36,21 @@ public class ViewModelMain2 extends BaseViewModel<UserBean> {
 
 
     public ViewModelMain2(BaseActivity activity){
-        super(activity,activity.getClass().getName());
+        super(activity);
         Log.i("zero","ViewModelMain2=============");
     }
+    public ViewModelMain2(){
+        super();
+    }
 
-    public void init() {
+    @Override
+    public void init(BaseActivity activity) {
+        this.activity = activity;
+        init();
+    }
+
+
+    private void init() {
         disposable = new CompositeDisposable();
         userList = new ArrayList<>();
         adapter = new AdapterMainActivity2(userList);

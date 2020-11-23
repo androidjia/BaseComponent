@@ -21,7 +21,7 @@ public abstract class BaseViewModel<D> extends ViewModel {
 
     protected MutableLiveData<List<D>> liveData = new MutableLiveData<>();
 
-    protected String tips;
+//    protected String tips;
     protected BaseActivity activity;
 
     public BaseViewModel(){
@@ -32,17 +32,13 @@ public abstract class BaseViewModel<D> extends ViewModel {
     }
 
     public BaseViewModel(BaseActivity activity){
-        this(activity,activity.getClass().getName());
+        this();
+        this.activity = activity;
     }
 
-    public BaseViewModel(BaseActivity activity, String tips){
-        this.activity = activity;
-        this.tips = tips;
-        refreshing.setValue(true);
-        moreLoading.setValue(false);
-        hasMore.setValue(true);
-        autoRefresh.setValue(false);
-    }
+    //需要这个的时候当不需要参数的时候可以使用这种
+    public abstract void init(BaseActivity activity);
+
 
     public void onLoadMore() {
         page.setValue(page.getValue()==null?page.getValue():0 +1);
@@ -108,4 +104,21 @@ public abstract class BaseViewModel<D> extends ViewModel {
         this.autoRefresh = autoRefresh;
     }
 
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+
+        if (activity != null && liveData != null) {
+            liveData.removeObservers(activity);
+            liveData = null;
+            activity = null;
+        }
+        if (page != null) page = null;
+        if (refreshing != null) refreshing = null;
+        if (moreLoading != null) moreLoading = null;
+        if (hasMore != null) hasMore = null;
+        if (autoRefresh != null) autoRefresh = null;
+
+    }
 }

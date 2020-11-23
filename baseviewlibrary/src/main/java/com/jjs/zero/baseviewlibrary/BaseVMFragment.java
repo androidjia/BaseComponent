@@ -191,7 +191,8 @@ public abstract class BaseVMFragment<V extends ViewDataBinding,M extends ViewMod
      * @return
      */
     protected <M extends ViewModel> M createViewModel(Class<M> m) {
-        return (M) new ViewModelProvider(getActivity(),new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(m);
+//        return (M) new ViewModelProvider(getActivity(),new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(m);
+        return (M) new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(m);//两者是否有影响未测试
     }
 
     /**

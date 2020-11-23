@@ -190,7 +190,8 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
      * @return
      */
     protected <M extends ViewModel> M createViewModel(Class<M> m) {
-        return (M) new ViewModelProvider(getActivity(),new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(m);
+//        return (M) new ViewModelProvider(getActivity(),new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(m);
+        return (M) new ViewModelProvider(getActivity(),ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(m);
     }
 
     /**

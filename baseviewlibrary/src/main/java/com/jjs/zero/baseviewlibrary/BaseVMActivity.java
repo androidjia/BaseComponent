@@ -140,7 +140,8 @@ public abstract class BaseVMActivity<V extends ViewDataBinding,M extends ViewMod
      * @return
      */
     protected <M extends ViewModel> M createViewModel(Class<M> m) {
-        return (M) new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(m);
+//        return (M) new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(m);
+        return (M) new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(m);
     }
 
     /**

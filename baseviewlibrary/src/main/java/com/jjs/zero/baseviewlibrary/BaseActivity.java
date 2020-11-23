@@ -141,7 +141,8 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
      * @return
      */
     protected <T extends ViewModel> T createViewModel(Class<T> t) {
-        return new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(t);
+//        return new ViewModelProvider(this,new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(t);
+        return new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(t);
     }
 
     /**

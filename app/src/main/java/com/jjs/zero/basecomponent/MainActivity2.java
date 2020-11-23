@@ -3,6 +3,7 @@ package com.jjs.zero.basecomponent;
 import com.jjs.zero.basecomponent.databinding.ActivityMain2Binding;
 import com.jjs.zero.basecomponent.model.ViewModelMain2;
 import com.jjs.zero.baseviewlibrary.BaseActivity;
+import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
 
 public class MainActivity2 extends BaseActivity<ActivityMain2Binding> {
 
@@ -47,8 +48,8 @@ public class MainActivity2 extends BaseActivity<ActivityMain2Binding> {
          * 　　返回当前值。 注意，在后台线程上调用此方法并不能保证将接收到最新的值。
          */
 
-        viewModel = createViewModel(new ViewModelMain2(this));
-        viewModel.init();
+        viewModel = createViewModel(ViewModelMain2.class);
+        viewModel.init(this);
 
 
 

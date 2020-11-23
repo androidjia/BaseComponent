@@ -30,7 +30,7 @@ public class MainViewModel extends BaseViewModel<DataFragmentBean> {
     }
 
     public MainViewModel(BaseActivity activity) {
-        super(activity,activity.getClass().getName());
+        super(activity);
     }
 
     public void init(BaseActivity activity){
