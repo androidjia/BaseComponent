@@ -23,9 +23,14 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+//    dataBinding {
+//        enabled = true
+//    }
+//    guadle plugin4.0.0之后使用
+    buildFeatures {
+        dataBinding = true
     }
+
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -42,8 +47,10 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
     api "com.google.android.material:material:${rootProject.ext.dependencies.material}"
-    api "androidx.constraintlayout:constraintlayout:${rootProject.ext.dependencies.constraintlayout}"
-
+    api ("androidx.constraintlayout:constraintlayout:${rootProject.ext.dependencies.constraintlayout}"){
+        exclude group: 'androidx.core'
+    }
+    api "androidx.localbroadcastmanager:localbroadcastmanager:${rootProject.ext.dependencies.localbroadcastmanager}"
     implementation project(path: ':utilslibrary')
 //    implementation "androidx.recyclerview:recyclerview:1.x.x"
 //    testImplementation 'junit:junit:4.12'
@@ -51,5 +58,4 @@ dependencies {
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 //    api "com.android.support:recyclerview-v7:29.0.3"
     implementation 'com.wang.avi:library:2.1.3'
-
 }

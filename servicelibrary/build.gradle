@@ -1,5 +1,6 @@
-apply plugin: 'com.android.library'
-
+plugins {
+    id 'com.android.library'
+}
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -22,10 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':baseviewlibrary')
-    implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
-    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.dependencies.constraintlayout}"
     //本地广播
-    api "androidx.localbroadcastmanager:localbroadcastmanager:${rootProject.ext.dependencies.localbroadcastmanager}"
+
 }

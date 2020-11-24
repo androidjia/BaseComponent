@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        userConfig {
+            storeFile file('/Users/junshuai.jia/AndroidStudioProjects/BaseComponent/baseKeyStore')
+            storePassword '123456'
+            keyAlias 'baseComponent'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
@@ -11,8 +19,6 @@ android {
         versionCode 1
         versionName "1.0.2"
 
-//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
 //        //只支持中文
 //        resConfigs "zh"
 //        ndk {
@@ -21,21 +27,28 @@ android {
 //        }
     }
 
-    dataBinding{
-        enabled = true
+//    dataBinding{
+//        enabled = true
+//    }
+//    guadle plugin4.0.0之后使用
+    buildFeatures {
+        dataBinding = true
     }
 
     buildTypes {
         release {
+
 //            //混淆
-//            minifyEnabled true
-//            zipAlignEnabled true
-//            // 移除无用的resource文件
-//            shrinkResources true
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
 //            签名
-//            signingConfig signingConfigs.defaultSign
+            signingConfig signingConfigs.userConfig
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            debuggable true
             buildConfigField 'String', 'domain', '"http://192.168.0.1:5555/MyProject/"'
+            manifestPlaceholders = [BASE_URL: "http://192.168.0.1:5555/MyProject/"]
         }
 
 
@@ -46,11 +59,13 @@ android {
 //            signingConfig signingConfigs.defaultSign
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'domain', '"http://192.168.0.1:8888/MyProject/"'
+            manifestPlaceholders = [BASE_URL: "http://192.168.0.1:8888/MyProject/"]
         }
 
         innerTest.initWith(buildTypes.debug)
         innerTest{
             buildConfigField 'String', 'domain', '"http://192.168.0.1:6666/MyProject/"'
+            manifestPlaceholders = [BASE_URL: "http://192.168.0.1:6666/MyProject/"]
             matchingFallbacks = ['innerTest', 'debug', 'release']
         }
         //自定义构建版本
@@ -79,6 +94,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //引入aar
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def type = variant.buildType.name
@@ -90,12 +112,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
+//    implementation(name: '****', ext: 'aar')
+
     implementation project(path: ':baseviewlibrary')
     implementation project(path: ':viewlibrary')
     implementation project(path: ':modellibrary')
     implementation project(path: ':servicelibrary')
     implementation project(path: ':utilslibrary')
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+//    implementation project(path: ':httplibrary')
+//    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
 
     implementation  "com.scwang.smart:refresh-layout-kernel:${rootProject.ext.dependencies.smartRefreshLayout}"      //核心必须依赖
@@ -107,8 +133,11 @@ dependencies {
     implementation  "com.scwang.smart:refresh-footer-ball:${rootProject.ext.dependencies.smartRefreshLayout}"        //球脉冲加载
 //    implementation  "com.scwang.smart:refresh-footer-classics:${rootProject.ext.dependencies.smartRefreshLayout}"    //经典加载
 
+//    implementation ("io.reactivex.rxjava2:rxandroid:${rootProject.ext.dependencies.rxandroid2}"){
+//        exclude group: 'org.reactivestreams'
+//    }
+    implementation ("io.reactivex.rxjava2:rxjava:${rootProject.ext.dependencies.rxjava2}"){
+        exclude group: 'org.reactivestreams'
+    }
 
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

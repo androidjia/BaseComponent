@@ -23,10 +23,12 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+//    dataBinding {
+//        enabled = true
+//    }
+    buildFeatures {
+        dataBinding = true
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,13 +38,15 @@ android {
 dependencies {
 
     implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
-    implementation "com.squareup.picasso:picasso:${rootProject.ext.dependencies.picasso}"
-
-
-
+    api ("com.squareup.picasso:picasso:${rootProject.ext.dependencies.picasso}"){
+        exclude group: 'com.squareup.okhttp3'
+        exclude group: 'com.squareup.okio'
+//        exclude group: 'androidx.exifinterface'
+    }
 //    微信
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.6.5'
     //datastore-preferences 代替 SharedPreferences
 //    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
 //    implementation "androidx.datastore:datastore-core:1.0.0-alpha02"
+    api 'joda-time:joda-time:2.10.1'
 }

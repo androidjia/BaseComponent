@@ -105,7 +105,7 @@ public class ViewModelMain2 extends BaseViewModel<UserBean> {
 
     private void getUsers(Context mContext){
 
-        new LocalDataManager(mContext).getUser().subscribe(new io.reactivex.Observer<List<UserBean>>() {
+        LocalDataManager.getInstance().getUser().subscribe(new io.reactivex.Observer<List<UserBean>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 disposable.add(d);

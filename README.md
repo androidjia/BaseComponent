@@ -106,7 +106,13 @@ v1.0.2
             maven { url 'https://jitpack.io' }
             maven { url 'https://maven.aliyun.com/repository/google' }
             maven { url 'https://maven.aliyun.com/repository/jcenter' }
-            
-            
+           
+添加网络请求封装
+ 
+url配置：
+    
+    使用buildConfig配置的url经过测试会在release和debug切断的时候拿不到数据
+    还是使用manifestPlaceholders配置url
+    
             
         

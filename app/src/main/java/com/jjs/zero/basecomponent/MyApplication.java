@@ -2,7 +2,7 @@ package com.jjs.zero.basecomponent;
 
 import android.app.Application;
 
-
+import com.jjs.zero.modellibrary.local.LocalDataManager;
 import com.scwang.smart.refresh.footer.BallPulseFooter;
 import com.scwang.smart.refresh.header.MaterialHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -23,5 +23,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        String ur = BuildConfig.domain;
+        LocalDataManager.init(this);
+
     }
 }

@@ -12,7 +12,17 @@ ext {
             constraintlayout        : '2.0.4',
             localbroadcastmanager   :'1.0.0',
             picasso                 :'2.71828',
-            smartRefreshLayout      :'2.0.1'
+            smartRefreshLayout      :'2.0.1',
+
+            rxjava2: '2.2.9',
+            retrofit2: '2.9.0',
+            rxandroid2: '2.1.1',
+            gson: '2.8.6',
+
+//old
+//            rxjava2: '2.2.3',
+//            retrofit2: '2.4.0',
+//            rxandroid2: '2.1.0',
     ]
 
 }

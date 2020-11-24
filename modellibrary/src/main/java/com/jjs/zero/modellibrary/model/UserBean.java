@@ -10,9 +10,11 @@ public class UserBean {
     private String id;
     private String mUserName;
     private String desc;
+    private String token;
 
-    public UserBean(String id, String mUserName, String desc) {
+    public UserBean(String id,String token,String mUserName, String desc) {
         this.id = id;
+        this.token = token;
         this.mUserName = mUserName;
         this.desc = desc;
     }
@@ -39,5 +41,13 @@ public class UserBean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

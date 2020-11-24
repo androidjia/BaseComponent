@@ -1,6 +1,7 @@
 package com.jjs.zero.basecomponent.model;
 
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -8,9 +9,15 @@ import com.jjs.zero.basecomponent.bean.DataFragmentBean;
 import com.jjs.zero.basecomponent.adapter.AdapterFragmentData;
 import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.baseviewlibrary.commonmodel.BaseViewModel;
+import com.jjs.zero.modellibrary.local.LocalDataManager;
+import com.jjs.zero.modellibrary.model.UserBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -36,7 +43,34 @@ public class MainViewModel extends BaseViewModel<DataFragmentBean> {
     public void init(BaseActivity activity){
         adapter = new AdapterFragmentData(data);
         adapter.addOnItemClickListener((view,position)->{
-            activity.startActivity(new Intent(activity,data.get(position).getAction()));
+            switch (position){
+                case 1:
+                    LocalDataManager.getInstance().insertUser(new UserBean("2","5sd4fd1sd4f545sd4f53","张三","你好a")).subscribe(new Observer() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull Object o) {
+                            Log.i("zero==========","onNext");
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.i("zero==========","onError");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            Log.i("zero==========","onComplete");
+                        }
+                    });
+                    break;
+                default:
+                    activity.startActivity(new Intent(activity,data.get(position).getAction()));
+                    break;
+            }
         });
 
         liveData.observe(activity,observe ->{

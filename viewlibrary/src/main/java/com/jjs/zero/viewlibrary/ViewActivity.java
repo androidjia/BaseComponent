@@ -33,9 +33,6 @@ import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
 import com.jjs.zero.viewlibrary.databinding.ActivityViewBinding;
 
-import io.alterac.blurkit.BlurKit;
-
-
 public class ViewActivity extends BaseActivity<ActivityViewBinding>{
 
     @Override
@@ -112,11 +109,6 @@ public class ViewActivity extends BaseActivity<ActivityViewBinding>{
                 startActivity(new Intent(mContext,View2Activity.class));
             }
         });
-
-        BlurKit.init(mContext);
-        Bitmap b  = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg_bottom_view);
-        Bitmap by = BlurKit.getInstance().blur(b,5);
-        viewBinding.imgBottomView.setImageBitmap(by);
 
         //开启向上按钮，manifest中有父activity的配置 androidx 貌似没有效果
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);

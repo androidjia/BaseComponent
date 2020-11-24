@@ -1,8 +1,11 @@
 package com.jjs.zero.modellibrary;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import com.jjs.zero.datalibrary.DataBases;
+import com.jjs.zero.httplibrary.httpService.BaseHttpManager;
+import com.jjs.zero.modellibrary.local.LocalDataManager;
 
 /**
  * @Author: jiajunshuai
@@ -13,12 +16,11 @@ public class BaseManager {
 
     protected Context mContext;
     protected DataBases mDataBases;
-    //api工具类
-
+    protected BaseHttpManager httpManager;
     public BaseManager(Context mContext) {
         this.mContext = mContext.getApplicationContext();
         mDataBases = DataBases.getInstance(this.mContext);
-
+        httpManager = new BaseHttpManager(mContext, LocalDataManager.token,LocalDataManager.userId);
     }
 
 }
