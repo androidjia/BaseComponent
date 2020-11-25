@@ -1,13 +1,11 @@
-package com.jjs.zero.modellibrary.local;
+package com.jjs.zero.modellibrary.manager;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.jjs.zero.datalibrary.entity.User;
 import com.jjs.zero.httplibrary.api.RequestApi;
-import com.jjs.zero.httplibrary.dto.Order;
 import com.jjs.zero.httplibrary.httpService.ResultMapper;
 import com.jjs.zero.modellibrary.BaseManager;
 import com.jjs.zero.modellibrary.Convert;
@@ -17,7 +15,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 

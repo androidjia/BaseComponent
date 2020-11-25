@@ -32,6 +32,7 @@ public abstract class DataBases extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),DataBases.class,"baseDemo.db")
                             .allowMainThreadQueries()//允许主线程查询
                             .addMigrations(MIGRATION_1_2)//数据库升级
+                            .addMigrations(MIGRATION_2_3)//数据库升级
                             .build();
                 }
             }
@@ -47,4 +48,15 @@ public abstract class DataBases extends RoomDatabase {
             database.execSQL("ALTER TABLE `user` ADD COLUMN `desc` TEXT");
         }
     };
+
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+//            int version = database.getVersion();
+            database.execSQL("ALTER TABLE `user` ADD COLUMN `desc` TEXT");
+        }
+    };
+
+
+
 }

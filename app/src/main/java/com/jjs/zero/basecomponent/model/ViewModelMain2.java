@@ -11,7 +11,7 @@ import com.jjs.zero.basecomponent.adapter.AdapterMainActivity2;
 import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.baseviewlibrary.OnItemClickListener;
 import com.jjs.zero.baseviewlibrary.commonmodel.BaseViewModel;
-import com.jjs.zero.modellibrary.local.LocalDataManager;
+import com.jjs.zero.modellibrary.manager.LocalDataManager;
 import com.jjs.zero.modellibrary.model.UserBean;
 
 import java.util.ArrayList;
@@ -57,11 +57,7 @@ public class ViewModelMain2 extends BaseViewModel<UserBean> {
         adapter.addOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClickListener(View view, int position) {
-//                new LocalDataManager(mContext).updateUser(userBeans.toArray(new UserBean[userBeans.size()]));
-//                activity.finish();
-
                 demoLiveData.setTag("改变了tag");
-
             }
         });
         liveData.observe(activity, new Observer<List<UserBean>>() {

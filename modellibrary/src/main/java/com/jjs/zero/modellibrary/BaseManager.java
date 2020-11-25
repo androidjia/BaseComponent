@@ -1,11 +1,10 @@
 package com.jjs.zero.modellibrary;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.jjs.zero.datalibrary.DataBases;
 import com.jjs.zero.httplibrary.httpService.BaseHttpManager;
-import com.jjs.zero.modellibrary.local.LocalDataManager;
+import com.jjs.zero.modellibrary.manager.LocalDataManager;
 
 /**
  * @Author: jiajunshuai

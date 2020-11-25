@@ -40,19 +40,21 @@ public abstract class BaseViewModel<D> extends ViewModel {
     //需要这个的时候当不需要参数的时候可以使用这种
     public abstract void init(BaseActivity activity);
 
-
+    @CallSuper
     public void onLoadMore() {
         page.setValue(page.getValue()==null?page.getValue():0 +1);
         refreshing.setValue(false);
         moreLoading.setValue(true);
     }
 
+    @CallSuper
     public void onRefresh() {
         page.setValue(0);
         refreshing.setValue(true);
         moreLoading.setValue(false);
     }
 
+    @CallSuper
     public void autoRefresh() {
         autoRefresh.setValue(true);
     }

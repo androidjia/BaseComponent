@@ -34,9 +34,13 @@ public class FragmentData extends BaseFragment<FragmentDataBinding> {
         viewBinding.setVm(mainViewModel);
         DataFragmentBean userBean = new DataFragmentBean("liveData和ViewModel以及DataBinding结合使用", MainActivity2.class);
         DataFragmentBean userBean2 = new DataFragmentBean("插入一条数据",null);
+        DataFragmentBean userBean3 = new DataFragmentBean("下载文件",null);
+        DataFragmentBean userBean4 = new DataFragmentBean("下载图片",null);
         List<DataFragmentBean> list = new ArrayList<>();
         list.add(userBean);
         list.add(userBean2);
+        list.add(userBean3);
+        list.add(userBean4);
         mainViewModel.setLiveData(list);
 
 

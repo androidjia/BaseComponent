@@ -114,5 +114,8 @@ url配置：
     使用buildConfig配置的url经过测试会在release和debug切断的时候拿不到数据
     还是使用manifestPlaceholders配置url
     
+    
+添加文件下载工具类
+
             
         

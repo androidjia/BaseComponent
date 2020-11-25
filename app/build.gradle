@@ -101,6 +101,10 @@ android {
         }
     }
 
+//    sourceSets {
+//        main.jniLibs.srcDirs = ['libs']
+//    }
+
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def type = variant.buildType.name
@@ -133,11 +137,13 @@ dependencies {
     implementation  "com.scwang.smart:refresh-footer-ball:${rootProject.ext.dependencies.smartRefreshLayout}"        //球脉冲加载
 //    implementation  "com.scwang.smart:refresh-footer-classics:${rootProject.ext.dependencies.smartRefreshLayout}"    //经典加载
 
-//    implementation ("io.reactivex.rxjava2:rxandroid:${rootProject.ext.dependencies.rxandroid2}"){
-//        exclude group: 'org.reactivestreams'
-//    }
+    implementation ("io.reactivex.rxjava2:rxandroid:${rootProject.ext.dependencies.rxandroid2}"){
+        exclude group: 'org.reactivestreams'
+    }
     implementation ("io.reactivex.rxjava2:rxjava:${rootProject.ext.dependencies.rxjava2}"){
         exclude group: 'org.reactivestreams'
     }
+
+    implementation "com.squareup.okhttp3:okhttp:3.14.9"
 
 }
