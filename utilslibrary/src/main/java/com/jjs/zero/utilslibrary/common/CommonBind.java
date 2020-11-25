@@ -17,24 +17,25 @@ public class CommonBind {
 
     @BindingAdapter("imgCircleUrl")
     public static void bindCircleImageUrl(ImageView imageView,String url) {
-        if (url != null && url.length()>0) {
+//        if (url != null && url.length()>0) {
+//        地址为空时placeholder显示
             Picasso.get().load(url)
                     .placeholder(R.drawable.ic_launcher)
                     .error(R.drawable.ic_launcher)
                     .transform(new CircleTransform())
                     .into(imageView);
-        }
+//        }
     }
 
     @BindingAdapter("imgUrl")
     public static void bindImageUrl(ImageView imageView,String url) {
-        if (url != null && url.length()>0) {
+//        if (url != null && url.length()>0) {
             Picasso.get().load(url)
                     .placeholder(R.drawable.ic_launcher)
                     .error(R.drawable.ic_launcher)
                     .transform(new CircleTransform())
                     .into(imageView);
-        }
+//        }
     }
 
 

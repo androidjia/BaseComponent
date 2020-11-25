@@ -18,6 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
 
 
 /**
@@ -73,6 +77,7 @@ public abstract class BaseDialogFragment<D extends ViewDataBinding> extends Dial
             }
         }
         viewBinding =  DataBindingUtil.inflate(inflater,layoutResId(),container,false);
+//        viewBinding.setLifecycleOwner(this);
         initData();
         return viewBinding.getRoot();
     }

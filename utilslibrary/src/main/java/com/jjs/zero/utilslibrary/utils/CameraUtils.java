@@ -3,6 +3,7 @@ package com.jjs.zero.utilslibrary.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,9 +38,9 @@ public class CameraUtils {
     // 相册选择回传
     public final static int GALLERY_REQUEST_CODE = 2;
     //拍照保存位置
-    private static String mTempPhotoPath;
+//    private static String mTempPhotoPath;
     // 照片所在的Uri地址
-    private static Uri imageUri;
+    public static Uri imageUri;
 
 
     /**
@@ -60,12 +61,19 @@ public class CameraUtils {
      * @param activity
      * @return
      */
-    public static Uri getImgUrl(Activity activity, String path) {
+    public static Uri getImgUrl(Activity activity) {
         Uri uri = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(activity,  activity.getPackageName()+".provider", new File(path));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            String fileName = "/img_" + System.currentTimeMillis()+".jpg";
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
+            values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/Pictures");
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            uri = activity.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(activity,  activity.getPackageName()+".provider", new File(getPhotoPath(activity)));
         } else {
-            uri = Uri.fromFile(new File(path));
+            uri = Uri.fromFile(new File(getPhotoPath(activity)));
         }
         return uri;
     }
@@ -75,32 +83,32 @@ public class CameraUtils {
      * @param activity
      * @return
      */
-    public static String takePhoto(Activity activity){
+    public static void takePhoto(Activity activity){
         // File.separator为系统自带的分隔符 是一个固定的常量
-//        mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.jpeg";
-        mTempPhotoPath = getPhotoPath(activity);
+//        mTempPhotoPath = getPhotoPath(activity);
         // 获取图片所在位置的Uri路径
-        imageUri = getImgUrl(activity,mTempPhotoPath);
+        imageUri = getImgUrl(activity);
         //下面这句指定调用相机拍照后的照片存储的路径
         // 跳转到系统的拍照界面
         Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intentToTakePhoto.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         activity.startActivityForResult(intentToTakePhoto, CAMERA_REQUEST_CODE);
-        return mTempPhotoPath;
+//        return mTempPhotoPath;
     }
 
-    public static String takePhoto(Activity activity, Fragment fragment){
+    public static void takePhoto( Fragment fragment){
         // File.separator为系统自带的分隔符 是一个固定的常量
-//        mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.jpeg";
-        mTempPhotoPath = getPhotoPath(activity);
+//        mTempPhotoPath = getPhotoPath(activity);
         // 获取图片所在位置的Uri路径
-        imageUri = getImgUrl(activity,mTempPhotoPath);
+        imageUri = getImgUrl(fragment.getActivity());
         //下面这句指定调用相机拍照后的照片存储的路径
         // 跳转到系统的拍照界面
         Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intentToTakePhoto.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         fragment.startActivityForResult(intentToTakePhoto, CAMERA_REQUEST_CODE);
-        return mTempPhotoPath;
+//        return mTempPhotoPath;
     }
 
     /**
@@ -113,7 +121,7 @@ public class CameraUtils {
         intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
         activity.startActivityForResult(intentToPickPic, GALLERY_REQUEST_CODE);
     }
-    public static void choosePhoto(Activity activity, Fragment fragment){
+    public static void choosePhoto(Fragment fragment){
         Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
         // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
         intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");

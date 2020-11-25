@@ -113,7 +113,7 @@ public abstract class BaseViewModel<D> extends ViewModel {
         super.onCleared();
 
         if (activity != null && liveData != null) {
-            liveData.removeObservers(activity);
+            if (liveData.hasObservers()) liveData.removeObservers(activity);
             liveData = null;
             activity = null;
         }

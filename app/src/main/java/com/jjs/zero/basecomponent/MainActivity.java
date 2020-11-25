@@ -155,17 +155,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         });
 
 
-        if (PermissionRequestUtils.getInstance().checkPermission(this, PermissionUtils.ABS_CAMERA)) {
-            PermissionRequestUtils.getInstance().requestPermission(this, new PermissionRequestUtils.OnPermissionResultListener() {
-                @Override
-                public void OnSuccessListener() {
-                }
 
-                @Override
-                public void OnFailListener() {
-                }
-            },PermissionUtils.ABS_CAMERA);
-        }
 
 //          状态栏设置
         StatusBarUtils.setStatusBarColorDark(this,true);
@@ -176,11 +166,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionRequestUtils.getInstance().onRequestPermissionsResult(requestCode,permissions,grantResults);
-    }
+
 
     public class SimplePageTransform implements ViewPager2.PageTransformer {
 

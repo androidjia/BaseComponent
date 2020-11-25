@@ -8,16 +8,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_empty">
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:text="Hello World! fragment mine"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_header"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:gravity="center"
+            android:layout_marginTop="60dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:imgCircleUrl="@{null}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

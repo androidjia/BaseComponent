@@ -56,9 +56,9 @@ public class PermissionRequestUtils{
         activity.requestPermissions(strings,REQUEST_CODE);
         this.onPermissionResultListener = onPermissionResultListener;
     }
-    public void requestPermission(@NonNull Fragment activity, OnPermissionResultListener onPermissionResultListener, @Size(min = 1) @NonNull String... strings){
+    public void requestPermission(@NonNull Fragment fragment, OnPermissionResultListener onPermissionResultListener, @Size(min = 1) @NonNull String... strings){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
-        activity.requestPermissions(strings,REQUEST_CODE);
+        fragment.requestPermissions(strings,REQUEST_CODE);
         this.onPermissionResultListener = onPermissionResultListener;
     }
 

@@ -46,9 +46,18 @@ public class PermissionUtils {
                     Manifest.permission.GET_ACCOUNTS
             };
             //定位权限
-            ABS_LOCATION = new String[] {
-                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-            };
+
+            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q) {
+                ABS_LOCATION = new String[] {
+                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+                        ,Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                };
+            } else {
+                ABS_LOCATION = new String[] {
+                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+                };
+            }
+
             //麦克风权限
             ABS_MICROPHONE = new String[] {
                     Manifest.permission.RECORD_AUDIO
