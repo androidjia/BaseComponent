@@ -17,7 +17,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * @Author: jiajunshuai
  * @CreateTime: 2020/11/25
- * @Details: <功能描述>
+ * @Details: <照片选择和拍照>
  */
 public class PickImgSelectDialogFragment extends BaseDialogFragment<DialogFragmentPickImgSelectBinding> implements View.OnClickListener {
     public PickImgSelectDialogFragment() {

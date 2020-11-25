@@ -32,7 +32,7 @@ public class FragmentMine extends BaseFragment<FragmentMineBinding> {
         viewBinding.ivHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.i("zero=========","点击了:");
                 if (PermissionRequestUtils.getInstance().checkPermission((Activity) mContext, PermissionUtils.ABS_CAMERA)) {
                     PermissionRequestUtils.getInstance().requestPermission(FragmentMine.this, new PermissionRequestUtils.OnPermissionResultListener() {
                         @Override
@@ -52,6 +52,15 @@ public class FragmentMine extends BaseFragment<FragmentMineBinding> {
 
                         }
                     },PermissionUtils.ABS_CAMERA);
+                } else {
+                    new PickImgSelectDialogFragment().addPickImgListener(
+                            new PickImgSelectDialogFragment.OnPickImgListener() {
+                                @Override
+                                public void onPickImgPath(String path) {
+                                    Log.i("zero=========","拍照回调=============mPath:"+path);
+                                }
+                            }
+                    ).show(getFragmentManager(),"");
                 }
             }
         });
