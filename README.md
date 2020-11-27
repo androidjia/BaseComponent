@@ -78,7 +78,10 @@ v1.0.2
             分区存储对于App访问存储方式、App数据存放以及App间数据共享，都产生很大影响。
             而Environment.getExternalStorageDirectory() 在 API Level 29 开始已被弃用，
             开发者应迁移至 Context#getExternalFilesDir(String), MediaStore, 或Intent#ACTION_OPEN_DOCUMENT。
-
+            
+            后台定位权限，拍照权限
+            
+            
         Android性能优化.md 和Android混淆.md 添加
 
 
@@ -119,4 +122,4 @@ url配置：
 
 适配Android10拍照和选择图片
             
-        
+Room升级

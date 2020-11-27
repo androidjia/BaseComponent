@@ -48,7 +48,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // optional - RxJava support for Room
     implementation ("androidx.room:room-rxjava2:$room_version"){
-        exclude group: 'org.reactivestreams'
+//        exclude group: 'org.reactivestreams'
 //        exclude group: 'io.reactivex.rxjava2'
     }
     // optional - Guava support for Room, including Optional and ListenableFuture

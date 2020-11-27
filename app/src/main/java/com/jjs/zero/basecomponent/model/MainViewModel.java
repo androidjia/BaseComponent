@@ -18,12 +18,14 @@ import com.jjs.zero.baseviewlibrary.BaseActivity;
 import com.jjs.zero.baseviewlibrary.commonmodel.BaseViewModel;
 import com.jjs.zero.modellibrary.manager.LocalDataManager;
 import com.jjs.zero.modellibrary.manager.RequestManager;
+import com.jjs.zero.modellibrary.model.TableTestBean;
 import com.jjs.zero.modellibrary.model.UserBean;
 import com.jjs.zero.utilslibrary.utils.FileUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -124,6 +126,10 @@ public class MainViewModel extends BaseViewModel<DataFragmentBean> {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    break;
+                case 4:
+                    LocalDataManager.getInstance().addTabTest(new TableTestBean("test1","1",18,new Date()));
+
                     break;
                 default:
                     activity.startActivity(new Intent(activity,data.get(position).getAction()));

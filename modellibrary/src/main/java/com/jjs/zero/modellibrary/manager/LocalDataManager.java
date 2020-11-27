@@ -4,11 +4,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.jjs.zero.datalibrary.entity.TabTest;
 import com.jjs.zero.datalibrary.entity.User;
 import com.jjs.zero.httplibrary.api.RequestApi;
 import com.jjs.zero.httplibrary.httpService.ResultMapper;
 import com.jjs.zero.modellibrary.BaseManager;
 import com.jjs.zero.modellibrary.Convert;
+import com.jjs.zero.modellibrary.model.TableTestBean;
 import com.jjs.zero.modellibrary.model.UserBean;
 
 import java.util.List;
@@ -81,17 +83,15 @@ public class LocalDataManager extends BaseManager {
     }
 
 
-    public Observable<ResponseBody> downloadFile(@NonNull String url){
-        return httpManager.getInterface(RequestApi.class).downloadFile(url);
+    public List<TabTest> getTabTestList(){
+        return mDataBases.tabTestDao().getTabTest();
+//        return null;
     }
 
-    public Observable<UserBean> getActive(Long time){
-        return httpManager.getInterface(RequestApi.class).getExperiencesActive(time).flatMap(new ResultMapper<>())
-                .map(order -> {
-                    return new UserBean("1","sdfsdfsdsffsdfsdf","张三","你好");
-                });
-    }
 
+    public void addTabTest(TableTestBean... tabTests){
+        mDataBases.tabTestDao().insertUsers(Convert.conVert(tabTests));
+    }
 
 
 }

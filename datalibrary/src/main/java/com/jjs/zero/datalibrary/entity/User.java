@@ -25,8 +25,6 @@ public class User {
 
     private String token;
 
-
-    @ColumnInfo
     private String desc;
     /**
      * 构造方法

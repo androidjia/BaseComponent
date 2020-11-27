@@ -1,6 +1,8 @@
 package com.jjs.zero.modellibrary;
 
+import com.jjs.zero.datalibrary.entity.TabTest;
 import com.jjs.zero.datalibrary.entity.User;
+import com.jjs.zero.modellibrary.model.TableTestBean;
 import com.jjs.zero.modellibrary.model.UserBean;
 
 import java.util.ArrayList;
@@ -32,4 +34,16 @@ public class Convert {
         }
         return arrayList;
     }
+
+
+    public static TabTest[] conVert(TableTestBean... tableTestBeans) {
+        TabTest[] arrayList = new TabTest[tableTestBeans.length];
+        for (int i = 0; i < tableTestBeans.length; i++) {
+            TabTest tabTest = new TabTest(tableTestBeans[i].getUserName(),tableTestBeans[i].getUserId(),tableTestBeans[i].getAge(),tableTestBeans[i].getCreateTime());
+            arrayList[i] = tabTest;
+        }
+        return arrayList;
+    }
+
+
 }
