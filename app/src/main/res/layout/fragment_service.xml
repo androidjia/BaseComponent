@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="array"
+            type="android.util.SparseArray&lt;int[]&gt;" />
+        <variable
+            name="index"
+            type="int" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,13 +25,36 @@
 
 
         <ImageView
-            android:id="@+id/tv_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/select_check_img"
-            android:gravity="center"
+            android:id="@+id/iv_1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@{index >2 ?@drawable/kfbkd:index == 0?@drawable/kf2:@drawable/kf1}"
+            android:scaleType="center"
+            android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_2"
+            />
+        <ImageView
+            android:id="@+id/iv_2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@{index >2 ? @drawable/lcbkd : index == 1 ? @drawable/lc2 : @drawable/lc1}"
+            android:scaleType="center"
+            app:layout_constraintStart_toEndOf="@id/iv_1"
+            app:layout_constraintTop_toTopOf="@id/iv_1"
+            app:layout_constraintBottom_toBottomOf="@id/iv_1"
+            app:layout_constraintEnd_toStartOf="@id/iv_3"
+            />
+        <ImageView
+            android:id="@+id/iv_3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@{index >2 ?@drawable/kfbkd:index==2?@drawable/kf2:@drawable/kf1}"
+            android:scaleType="center"
+            app:layout_constraintStart_toEndOf="@id/iv_2"
+            app:layout_constraintTop_toTopOf="@id/iv_1"
+            app:layout_constraintBottom_toBottomOf="@id/iv_1"
             app:layout_constraintEnd_toEndOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

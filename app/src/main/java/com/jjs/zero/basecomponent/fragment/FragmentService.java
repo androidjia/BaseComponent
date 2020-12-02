@@ -3,7 +3,11 @@ package com.jjs.zero.basecomponent.fragment;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
 
 import com.jjs.zero.basecomponent.R;
 import com.jjs.zero.basecomponent.databinding.FragmentServiceBinding;
@@ -27,20 +31,47 @@ public class FragmentService extends BaseFragment<FragmentServiceBinding> {
             @Override
             public void onClick(View view) {
                 Log.i("zero======","tv:service");
-                viewBinding.tv1.setSelected(false);
-                viewBinding.tv1.setEnabled(false);
+//                viewBinding.iv1.setSelected(false);
+//                viewBinding.iv1.setEnabled(false);
+
+//                viewBinding.setIndex(2);
             }
         });
 
-        viewBinding.tv1.setOnClickListener(new View.OnClickListener() {
+        viewBinding.iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("zero======","tv1:service");
-                viewBinding.tv1.setSelected(true);
+                viewBinding.setIndex(0);
             }
         });
 
-        StateListDrawable drawable = (StateListDrawable) viewBinding.tv1.getDrawable();
+        viewBinding.iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewBinding.setIndex(1);
+            }
+        });
+
+        viewBinding.iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewBinding.setIndex(2);
+            }
+        });
+
+//        StateListDrawable drawable = (StateListDrawable) viewBinding.iv1.getDrawable();
+
+        SparseArray<int[]> sparseArray = new SparseArray<>();
+        int [] img_1 = new int[]{R.drawable.kf1,R.drawable.kf2,R.drawable.kfbkd};
+        int [] img_2 = new int[]{R.drawable.lc1,R.drawable.lc2,R.drawable.lcbkd};
+        int [] img_3 = new int[]{R.drawable.kf1,R.drawable.kf2,R.drawable.kfbkd};
+        sparseArray.append(0,img_1);
+        sparseArray.append(1,img_2);
+        sparseArray.append(2,img_1);
+
+        viewBinding.setArray(sparseArray);
+        viewBinding.setIndex(3);
     }
 
     @Override

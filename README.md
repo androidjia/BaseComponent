@@ -85,30 +85,29 @@ v1.0.2
         Android性能优化.md 和Android混淆.md 添加
 
 
-        数据库分层解耦
+数据库分层解耦
 
-        dataBinding bindingAdapter结合smartRefreshLayout使用
+    dataBinding bindingAdapter结合smartRefreshLayout使用
 
-        添加ViewModel和liveData使用
-        viewPager2+tablelayout+FragmentStatuAdapter (但是有点问题)
-
-        androidx fragment懒加载:
-            viewpage+FragmentPagerAdapter+tablayout
-            FragmentPagerAdapter:构造方法中添加 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-            FragmentTransaction：调用FragmentTransaction的setMaxLifecycle(fragment,Lifecycle.State.STARTED)
-            
-            
-        下载缓慢使用阿里镜像：
-            
-            maven {
-                        url "http://maven.aliyun.com/nexus/content/groups/public/"
-                    }
+    添加ViewModel和liveData使用
+    viewPager2+tablelayout+FragmentStatuAdapter (但是有点问题)
         
-        或者：
-        
-            maven { url 'https://jitpack.io' }
-            maven { url 'https://maven.aliyun.com/repository/google' }
-            maven { url 'https://maven.aliyun.com/repository/jcenter' }
+androidx fragment懒加载:
+
+    viewpage+FragmentPagerAdapter+tablayout
+    FragmentPagerAdapter:构造方法中添加 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    FragmentTransaction：调用FragmentTransaction的setMaxLifecycle(fragment,Lifecycle.State.STARTED)
+            
+            
+下载缓慢使用阿里镜像：
+            
+    maven {
+                url "http://maven.aliyun.com/nexus/content/groups/public/"
+            }
+    或者：
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
            
 添加网络请求封装
  
@@ -116,7 +115,6 @@ url配置：
     
     使用buildConfig配置的url经过测试会在release和debug切断的时候拿不到数据
     还是使用manifestPlaceholders配置url
-    
     
 添加文件下载工具类
 
