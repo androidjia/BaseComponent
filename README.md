@@ -82,7 +82,7 @@ v1.0.2
             后台定位权限，拍照权限
             
             
-        Android性能优化.md 和Android混淆.md 添加
+Android性能优化.md 和Android混淆.md 添加
 
 
 数据库分层解耦
@@ -123,3 +123,5 @@ url配置：
 Room升级
 
 自定义控件
+
+集成Bugly

@@ -13,7 +13,12 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
-
+    <!--bugly -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
 
     <!-- android 8.0 安装app需要此权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
@@ -66,6 +71,22 @@
                 android:resource="@xml/provider_path"/>
         </provider>
 
+<!--        &lt;!&ndash; 配置APP ID &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="BUGLY_APPID"-->
+<!--            android:value="e7c1c61602" />-->
+<!--        &lt;!&ndash; 配置APP版本号 &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="BUGLY_APP_VERSION"-->
+<!--            android:value="" />-->
+<!--        &lt;!&ndash; 配置APP渠道号 &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="BUGLY_APP_CHANNEL"-->
+<!--            android:value="" />-->
+<!--        &lt;!&ndash; 配置Bugly调试模式（true或者false）&ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="BUGLY_ENABLE_DEBUG"-->
+<!--            android:value="true" />-->
     </application>
 
 </manifest>
