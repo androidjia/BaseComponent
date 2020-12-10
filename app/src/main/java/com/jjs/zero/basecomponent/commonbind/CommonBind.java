@@ -1,9 +1,14 @@
 package com.jjs.zero.basecomponent.commonbind;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.util.Log;
+import android.view.View;
 
 import androidx.databinding.BindingAdapter;
 
+import com.jjs.zero.basecomponent.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
@@ -38,5 +43,18 @@ public class CommonBind {
         smartLayout.setOnRefreshListener(onRefreshListener);
         smartLayout.setOnLoadMoreListener(onLoadMoreListener);
     }
+
+    @BindingAdapter("bindRipple")
+    public static void bindRipples(View view, Drawable drawableRes){
+        Log.i("zero","bindRipples===========");
+        if (drawableRes == null) return;
+        int[][] status = new int[1][];
+        status[0] = new int[]{android.R.attr.state_pressed};
+        int[] colors = new int[]{R.color.colorPrimary};
+        ColorStateList stateList = new ColorStateList(status,colors);
+        RippleDrawable rippleDrawable = new RippleDrawable(stateList,drawableRes,null);
+        view.setBackground(rippleDrawable);
+    }
+
 
 }

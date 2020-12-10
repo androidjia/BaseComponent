@@ -2,6 +2,7 @@ package com.jjs.zero.basecomponent.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 
@@ -64,6 +65,12 @@ public class FragmentMine extends BaseFragment<FragmentMineBinding> {
                 }
             }
         });
+
+//        viewBinding.tvPlus.setRadius(10);
+//        viewBinding.tvPlus.setRadiusWithStroke(10,Color.BLUE,4);
+        viewBinding.tvPlus.setBgRadiusWithStroke(20,Color.RED,0,4);
+        viewBinding.tvPlus.setText("你好");
+        viewBinding.tvPlus.setShadowLayer(10,20,10,Color.RED);
     }
 
     @Override

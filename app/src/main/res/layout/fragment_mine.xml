@@ -19,5 +19,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:imgCircleUrl="@{null}"/>
+
+        <com.jjs.zero.basecomponent.widget.TextViewPlus
+            android:id="@+id/tv_plus"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_header"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
