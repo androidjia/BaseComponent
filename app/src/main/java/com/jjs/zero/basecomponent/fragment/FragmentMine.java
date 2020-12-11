@@ -5,20 +5,21 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.TypedArrayUtils;
 
 import com.jjs.zero.basecomponent.R;
 import com.jjs.zero.basecomponent.databinding.FragmentMineBinding;
 import com.jjs.zero.basecomponent.dialog.PickImgSelectDialogFragment;
 import com.jjs.zero.baseviewlibrary.BaseFragment;
 import com.jjs.zero.utilslibrary.utils.PermissionRequestUtils;
-import com.jjs.zero.utilslibrary.utils.PermissionUtils;
+
+import java.util.List;
 
 /**
  * @Author: jiajunshuai
@@ -78,32 +79,25 @@ public class FragmentMine extends BaseFragment<FragmentMineBinding> {
                 Log.i("zero","click:"+isFastClick());
 //                CrashReport.testJavaCrash();
 
-                if (PermissionRequestUtils.getInstance().checkPermission((Activity) mContext, PermissionUtils.ABS_CAMERA)) {
-                    PermissionRequestUtils.getInstance().requestPermission(FragmentMine.this, new PermissionRequestUtils.OnPermissionResultListener() {
+
+                if (PermissionRequestUtils.get().checkPermission((Activity) mContext, PermissionRequestUtils.ABS_CAMERA)) {
+                    PermissionRequestUtils.get().requestPermission(FragmentMine.this, new PermissionRequestUtils.OnPermissionResultListener() {
                         @Override
                         public void OnSuccessListener() {
-                            new PickImgSelectDialogFragment().addPickImgListener(
-                                    new PickImgSelectDialogFragment.OnPickImgListener() {
-                                        @Override
-                                        public void onPickImgPath(String path) {
-                                            Log.i("zero=========","拍照回调=============mPath:"+path);
-                                        }
+                            new PickImgSelectDialogFragment().addPickImgListener(path -> {
+                                Log.i("zero=========","拍照回调=============mPath:"+path);
                                     }
                             ).show(getFragmentManager(),"");
                         }
 
                         @Override
-                        public void OnFailListener() {
-
+                        public void OnFailListener(List<String> permissions) {
+                            Log.i("zero=========","拍照回调=============mPath:"+permissions.size());
                         }
-                    },PermissionUtils.ABS_CAMERA);
+                    },PermissionRequestUtils.ABS_CAMERA);
                 } else {
-                    new PickImgSelectDialogFragment().addPickImgListener(
-                            new PickImgSelectDialogFragment.OnPickImgListener() {
-                                @Override
-                                public void onPickImgPath(String path) {
-                                    Log.i("zero=========","拍照回调=============mPath:"+path);
-                                }
+                    new PickImgSelectDialogFragment().addPickImgListener(path -> {
+                                Log.i("zero=========","拍照回调=============mPath:"+path);
                             }
                     ).show(getFragmentManager(),"");
                 }
@@ -132,7 +126,8 @@ public class FragmentMine extends BaseFragment<FragmentMineBinding> {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionRequestUtils.getInstance().onRequestPermissionsResult(requestCode,permissions,grantResults);
+        Log.i("zero=========","onRequestPermissionsResult=============:"+permissions.length+"     grantResults:"+grantResults.length);
+        PermissionRequestUtils.get().onRequestPermissionsResult(requestCode,permissions,grantResults);
     }
 
 }

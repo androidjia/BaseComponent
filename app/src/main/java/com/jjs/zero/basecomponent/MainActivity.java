@@ -27,7 +27,6 @@ import com.jjs.zero.baseviewlibrary.BaseFragment;
 import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
 import com.jjs.zero.servicelibrary.TestActivity;
 import com.jjs.zero.utilslibrary.utils.PermissionRequestUtils;
-import com.jjs.zero.utilslibrary.utils.PermissionUtils;
 import com.jjs.zero.utilslibrary.utils.StatusBarUtils;
 import com.jjs.zero.viewlibrary.ViewBaseActivity;
 
@@ -165,7 +164,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
 
     }
-
 
 
     public class SimplePageTransform implements ViewPager2.PageTransformer {
