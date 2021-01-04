@@ -153,7 +153,6 @@ public class PermissionRequestUtils{
                 per.add(permissions[i]);
             }
         }
-
         if (per.size() > 0) {
             onPermissionResultListener.OnFailListener(per);
         } else {

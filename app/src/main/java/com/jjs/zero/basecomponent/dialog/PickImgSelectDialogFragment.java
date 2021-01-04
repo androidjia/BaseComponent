@@ -34,6 +34,7 @@ public class PickImgSelectDialogFragment extends BaseDialogFragment<DialogFragme
     private OnPickImgListener onPickImgListener;
     public interface OnPickImgListener {
         void onPickImgPath(String path);
+//        void onPickImgUri(Uri path);
     }
 
     public PickImgSelectDialogFragment addPickImgListener(OnPickImgClickListener onPickImgClickListener) {
@@ -93,6 +94,7 @@ public class PickImgSelectDialogFragment extends BaseDialogFragment<DialogFragme
                     String imgPaths = CameraUtils.getRealPathFromUri(mContext,imageUris);
                     if (onPickImgListener != null) {
                         onPickImgListener.onPickImgPath(imgPaths);
+//                        onPickImgListener.onPickImgUri(imageUris);
                         dismissAllowingStateLoss();
                     }
                     break;
@@ -102,6 +104,7 @@ public class PickImgSelectDialogFragment extends BaseDialogFragment<DialogFragme
                     String imgPath = CameraUtils.getRealPathFromUri(mContext,imageUri);
                     if (onPickImgListener != null) {
                         onPickImgListener.onPickImgPath(imgPath);
+//                        onPickImgListener.onPickImgUri(imageUri);
                         dismissAllowingStateLoss();
                     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -162,8 +163,87 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         setTitle("statusBar:"+StatusBarUtils.statusBarHeight(this)+"  title:"+StatusBarUtils.titleBarHeight(this));
 
 
+//        byte[] array = new byte[]{(byte) 0x85,(byte) 0xCE,(byte)0xB6,(byte)0xF0,(byte)0xA4};
+        byte[] array2 = new byte[]{(byte) 0x85,(byte) 0xff,(byte)0x87,(byte)0xe9,(byte)0xaf};
+        String str = "";
+        int times = 0;
+        for (int i = 0; i <array2.length; i++) {
+//            str += Integer.toHexString(array[i] & 0x7F);
+            str += byteToBit(array2[i]);
+            Log.i("======zero=====","str:"+str);
+        }
+        Log.i("======zero=====","str:"+str+" len:"+str.length()+" time:"+binaryToInt(str));
 
+
+        Log.i("======zero=====","字符截取str:"+ binaryToInt(byteToBit((byte) 0x85,5,7)));
     }
+
+
+    public String byteToBit(byte b,int start,int end) {
+        String str = "";
+        if (start <0 || end>7) return str;
+        for (int i = start; i <= end; i++) {
+            str += (byte) ((b >> (7-i)) & 0x1);
+        }
+        return str;
+    }
+
+
+    public String byteToBit(byte b){
+//        int bit = (int)((b>>start)&(0xFF>>(8-len)));
+//        return bit;
+        return "" + (byte) ((b >> 6) & 0x1)
+                + (byte) ((b >> 5) & 0x1) + (byte) ((b >> 4) & 0x1)
+                + (byte) ((b >> 3) & 0x1) + (byte) ((b >> 2) & 0x1)
+                + (byte) ((b >> 1) & 0x1) + (byte) ((b >> 0) & 0x1);
+    }
+
+
+    public  static  long  binaryToInt(String binary) {
+        if (TextUtils.isEmpty(binary)) return 0;
+        int  max = binary.length();
+        String new_binary =  "" ;
+        if  (max >= 2 && binary.startsWith( "0" )) {
+            int  position = 0;
+            for  ( int  i = 0; i < binary.length(); i++) {
+                char  a = binary.charAt(i);
+                if  (a !=  '0'  ) {
+                    position = i;
+                    break ;
+                }
+            }
+            if  (position == 0) {
+                new_binary = binary.substring(max - 1, max);
+            }  else  {
+                new_binary = binary.substring(position, max);
+            }
+        }  else  {
+            new_binary = binary;
+        }
+        int  new_width = new_binary.length();
+
+        long  result = 0;
+        if  (new_width < 32) {
+            for  ( int  i = new_width; i > 0; i--) {
+                char  c = new_binary.charAt(i - 1);
+                int  algorism = c -  '0'  ;
+                result += Math. pow(2, new_width - i) * algorism;
+            }
+        }  else  if  (new_width == 32) {
+            for  ( int  i = new_width; i > 1; i--) {
+                char  c = new_binary.charAt(i - 1);
+                int  algorism = c -  '0'  ;
+                result += Math. pow(2, new_width - i) * algorism;
+            }
+            result += -2147483648;
+        }
+//        int  a =  new  Long(result).intValue();
+        return  result;
+    }
+
+
+
+
 
 
     public class SimplePageTransform implements ViewPager2.PageTransformer {

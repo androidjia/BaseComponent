@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+<!--        <layer-list>-->
+<!--            <item android:drawable="@drawable/ic_array_left_purlple_press" android:width="42dp" android:height="42dp"/>-->
+<!--        </layer-list>-->
+        <bitmap android:src="@drawable/ic_array_left_purlple_press" android:tileMode="disabled" android:gravity="center"/>
+    </item>
+    <item >
+        <bitmap android:src="@drawable/ic_array_left_purlple" android:tileMode="disabled" android:gravity="center"/>
+    </item>
+<!--    <item>-->
+<!--        <layer-list>-->
+<!--            <item android:drawable="@drawable/ic_array_left_purlple" android:width="42dp" android:height="42dp" android:gravity="center"/>-->
+<!--        </layer-list>-->
+<!--    </item>-->
+</selector>
