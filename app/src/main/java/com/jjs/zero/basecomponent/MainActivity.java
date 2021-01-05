@@ -134,8 +134,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         viewBinding.tv.setOnClickListener(view -> {
 //            NotificationUtils.getInstance(this).createNotification("这是第二个标题","gengduododsfdklasdjfsdjfklsdjfklsjf",
 //                    NotificationUtils.NotificationStatus.LARGE,MainActivity2.class,2);
-
-
             startActivity(new Intent(mContext,MainActivity2.class));
             //创建进度条通知
 //            NotificationUtils.getInstance(this).createProgressNotification(builder,noId,100,progress);
