@@ -2,6 +2,7 @@ package com.jjs.zero.baseviewlibrary;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
@@ -21,7 +22,12 @@ public abstract class BaseRecycleAdapter<T,D extends ViewDataBinding> extends Re
     protected List<T> data;
     protected Context mContext;
     protected OnItemClickListener onItemClickListener;
+    private boolean isUseDefaultListener = true;
 
+    protected BaseRecycleAdapter(List<T> data,boolean isUseDefaultListener) {
+        this(data);
+        this.isUseDefaultListener = isUseDefaultListener;
+    }
     protected BaseRecycleAdapter(List<T> data) {
         this(null,data);
     }
@@ -48,9 +54,21 @@ public abstract class BaseRecycleAdapter<T,D extends ViewDataBinding> extends Re
     @Override
     public void onBindViewHolder(ViewHolder<D> holder, int position) {
         onBindViewHolders(holder.binding,position);
+        checkedListener(holder.binding,position);
         holder.binding.executePendingBindings();
     }
-
+    
+    protected void checkedListener(D binding,int position){
+        if (isUseDefaultListener && onItemClickListener != null) {
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onClickListener(view,position);
+                }
+            });
+        }
+    }
+    
     @Override
     public int getItemCount() {
         return data!=null?data.size():0;

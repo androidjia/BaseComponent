@@ -51,11 +51,14 @@ public interface UserDao {
     @Query("SELECT * FROM  user LIMIT 1")
     Single<List<User>> getUser();
 
+    @Query("SELECT * FROM  user LIMIT 1")
+    User getUserInfo();
+
     @Query("SELECT * FROM  user")
     Single<List<User>> getUsers();
 
     //根据字段查询
-    @Query("SELECT * FROM User WHERE username= :name")
+    @Query("SELECT * FROM User WHERE user_name= :name")
     Single<User> getUserByName(String name);
 
 
@@ -68,6 +71,7 @@ public interface UserDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insertUsers(User... users);
+    //或者返回空
 //    void insertUsers(User... users);
 
 

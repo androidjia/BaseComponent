@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +15,15 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
+import com.jjs.zero.baseviewlibrary.databinding.FragmentBaseBinding;
 
 
 /**
@@ -29,40 +34,52 @@ import androidx.fragment.app.Fragment;
 public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
 
     protected V viewBinding;
-    protected boolean mIsVisible = false;
     private View emptyView;
     private LoadingFragment loadingView;
 
     protected abstract int layoutResId();
     protected Context mContext;
+    private FragmentBaseBinding mRootViewBinding;
 
-
+//    protected boolean mIsVisible = false;
+    private boolean isFirstLoad = true;//是否第一次加载
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getActivity();
-        View ll = inflater.inflate(R.layout.fragment_base,container,false);
-        viewBinding = DataBindingUtil.inflate(getActivity().getLayoutInflater(),layoutResId(),null,false);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        viewBinding.getRoot().setLayoutParams(params);
-        RelativeLayout mContaioner = ll.findViewById(R.id.container);
-        mContaioner.addView(viewBinding.getRoot());
-        initData();
-        return ll;
+        mRootViewBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_base,container,false);
+        viewBinding = DataBindingUtil.inflate(inflater,layoutResId(),null,false);
+        viewBinding.setLifecycleOwner(this);//lifecycle结合databinding只有在前台才会更新数据
+        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT);
+        mRootViewBinding.container.addView(viewBinding.getRoot(),params);
+//        initData();
+        return mRootViewBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFirstLoad) {
+            isFirstLoad = false;
+            initData();
+        }
     }
 
     //数据缓加载
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()){
-            mIsVisible = true;
-            onVisible();
-        }else {
-            mIsVisible = false;
-            onInVisible();
-        }
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (getUserVisibleHint()){
+//            mIsVisible = true;
+//            onVisible();
+//        }else {
+//            mIsVisible = false;
+//            onInVisible();
+//        }
+//    }
+
+
+
 
     protected <T extends View> T getView(@IdRes int id){
         return (T)getView().findViewById(id);
@@ -71,21 +88,21 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     //加载数据
     protected abstract void initData();
 
-    protected void onInVisible() {
+//    protected void onInVisible() {
+//
+//    }
 
-    }
-
-    protected void onVisible() {
-        loadData();
-    }
+//    protected void onVisible() {
+//        loadData();
+//    }
 
     /**
      * 显示时加载数据 生命周期会先执行 setUserVisibleHint 再执行onActivityCreated
      * 在 onActivityCreated 之后第一次显示加载数据，只加载一次
      */
-    protected void loadData() {
-
-    }
+//    protected void loadData() {
+//
+//    }
 
 
     /**
@@ -163,6 +180,28 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
 
     protected void showToast(@StringRes int msg){
         Toast.makeText(mContext,msg, Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * 返回没有参数的viewModel
+     * @param m
+     * @param <M>
+     * @return
+     */
+    protected <M extends ViewModel> M createViewModel(Class<M> m) {
+//        return (M) new ViewModelProvider(getActivity(),new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(m);
+        return (M) new ViewModelProvider(getActivity(),ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(m);
+    }
+
+    /**
+     * 返回带参数的viewModel
+     * @param t
+     * @param <M>
+     * @return
+     */
+    protected <M extends ViewModel> M createViewModel(ViewModel t) {
+        return (M) new ViewModelProvider(getActivity(),new CommonViewModelFactory(t)).get(t.getClass());
     }
 
 }

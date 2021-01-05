@@ -17,13 +17,14 @@ import java.util.UUID;
 public class User {
     @NonNull  // 主键不能为空
     @PrimaryKey
-    @ColumnInfo(name = "userid")//room 列注解
+    @ColumnInfo(name = "user_id")//room 列注解
     private String id;
 
-    @ColumnInfo(name = "username")
+    @ColumnInfo(name = "user_name")
     private String mUserName;
 
-    @ColumnInfo
+    private String token;
+
     private String desc;
     /**
      * 构造方法
@@ -73,5 +74,13 @@ public class User {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

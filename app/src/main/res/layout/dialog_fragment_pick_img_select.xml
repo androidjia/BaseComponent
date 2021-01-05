@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:background="@drawable/bg_white_top_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:id="@+id/tv_camare"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="立即拍照"
+                android:onClick="@{listener}"
+                android:gravity="center"
+                android:textColor="#00C0C5"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+                android:id="@+id/tv_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:text="从相册选择"
+                android:textColor="#00C0C5"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:onClick="@{listener}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_camare"
+                />
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#EFEFEF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_photo"
+                />
+            <TextView
+                android:id="@+id/tv_quit"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:text="取消"
+                android:textColor="#AAAAAA"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:onClick="@{listener}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

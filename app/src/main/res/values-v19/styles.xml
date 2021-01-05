@@ -2,6 +2,7 @@
 <resources>
     <style name="AppTheme.NoActionBar" parent="BaseAppTheme">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!-- 全面屏 底部导航透明 会遮挡布局-->
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 </resources>

@@ -15,9 +15,15 @@ import android.view.WindowManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.jjs.zero.baseviewlibrary.commonmodel.CommonViewModelFactory;
+import com.jjs.zero.baseviewlibrary.databinding.DialogFragmentBaseBinding;
 
 
 /**
@@ -32,7 +38,7 @@ public abstract class BaseDialogFragment<D extends ViewDataBinding> extends Dial
     protected Context mContext;
     private int viewSite = Gravity.CENTER;//布局位置
     private boolean isOnTouchOutSide = false;
-
+    private DialogFragmentBaseBinding rootBinding;
     protected BaseDialogFragment() {
         super();
     }
@@ -72,9 +78,13 @@ public abstract class BaseDialogFragment<D extends ViewDataBinding> extends Dial
                 getDialog().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);// 解决全屏时状态栏变黑
             }
         }
+        rootBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_fragment_base,container,false);
         viewBinding =  DataBindingUtil.inflate(inflater,layoutResId(),container,false);
+        viewBinding.setLifecycleOwner(this);
+        ConstraintLayout.LayoutParams layout = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.MATCH_PARENT);
+        rootBinding.container.addView(viewBinding.getRoot(),layout);
         initData();
-        return viewBinding.getRoot();
+        return rootBinding.getRoot();
     }
 
 
