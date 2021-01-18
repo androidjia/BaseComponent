@@ -147,6 +147,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:3.14.9"
 
     implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 //    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 
 

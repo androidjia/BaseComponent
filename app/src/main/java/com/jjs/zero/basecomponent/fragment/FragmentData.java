@@ -2,6 +2,7 @@ package com.jjs.zero.basecomponent.fragment;
 
 import android.util.Log;
 
+import com.jjs.zero.basecomponent.AudioActivity;
 import com.jjs.zero.basecomponent.bean.DataFragmentBean;
 import com.jjs.zero.basecomponent.MainActivity2;
 import com.jjs.zero.basecomponent.R;
@@ -37,12 +38,14 @@ public class FragmentData extends BaseFragment<FragmentDataBinding> {
         DataFragmentBean userBean3 = new DataFragmentBean("下载文件",null);
         DataFragmentBean userBean4 = new DataFragmentBean("下载图片",null);
         DataFragmentBean userBean5 = new DataFragmentBean("插入一条tabTest数据",null);
+        DataFragmentBean userBean6 = new DataFragmentBean("录音", AudioActivity.class);
         List<DataFragmentBean> list = new ArrayList<>();
         list.add(userBean);
         list.add(userBean2);
         list.add(userBean3);
         list.add(userBean4);
         list.add(userBean5);
+        list.add(userBean6);
         mainViewModel.setLiveData(list);
 
 

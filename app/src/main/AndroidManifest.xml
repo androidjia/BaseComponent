@@ -3,51 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jjs.zero.basecomponent">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!-- -往sdcard中添加读写数据的权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- -往sdcard中添加读写数据的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--在sdcard中创建/删除文件的权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-
-    <!--定位权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" /> <!-- 定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
-    <!--bugly -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- bugly -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-
-    <!-- android 8.0 安装app需要此权限 -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-
-    <!-- android 9.0 网络权限 usesCleartextTraffic 在api28以下默认为true 当属性设置为“false”时，
-    平台组件（例如，HTTP和FTP堆栈，DownloadManager和MediaPlayer）将拒绝应用程序使用明文流量的请求-->
-<!--    <uses-library android:name="org.apache.http.legacy" android:required="false"/>-->
-<!--   9.0 当手机处于亮屏状态时, 会显示一个通知栏, 当手机处于锁屏或者灭屏状态时，会亮屏并直接进入到CallActivity中-->
-<!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
-
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- android 8.0 安装app需要此权限 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!--
+ android 9.0 网络权限 usesCleartextTraffic 在api28以下默认为true 当属性设置为“false”时，
+    平台组件（例如，HTTP和FTP堆栈，DownloadManager和MediaPlayer）将拒绝应用程序使用明文流量的请求
+    -->
+    <!-- <uses-library android:name="org.apache.http.legacy" android:required="false"/> -->
+    <!-- 9.0 当手机处于亮屏状态时, 会显示一个通知栏, 当手机处于锁屏或者灭屏状态时，会亮屏并直接进入到CallActivity中 -->
+    <!-- <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" /> -->
     <!-- 兼容10.0系统，允许App在后台获得位置信息 -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".AudioActivity"/>
 
         <meta-data
             android:name="BASE_URL"
@@ -60,39 +54,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-
-
-
-        <!-- 7.0 文件适配 -->
+        </activity> <!-- 7.0 文件适配 -->
         <provider
-            android:authorities="${applicationId}.provider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            >
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_path"/>
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_path" />
         </provider>
-
-<!--        &lt;!&ndash; 配置APP ID &ndash;&gt;-->
-<!--        <meta-data-->
-<!--            android:name="BUGLY_APPID"-->
-<!--            android:value="e7c1c61602" />-->
-<!--        &lt;!&ndash; 配置APP版本号 &ndash;&gt;-->
-<!--        <meta-data-->
-<!--            android:name="BUGLY_APP_VERSION"-->
-<!--            android:value="" />-->
-<!--        &lt;!&ndash; 配置APP渠道号 &ndash;&gt;-->
-<!--        <meta-data-->
-<!--            android:name="BUGLY_APP_CHANNEL"-->
-<!--            android:value="" />-->
-<!--        &lt;!&ndash; 配置Bugly调试模式（true或者false）&ndash;&gt;-->
-<!--        <meta-data-->
-<!--            android:name="BUGLY_ENABLE_DEBUG"-->
-<!--            android:value="true" />-->
     </application>
 
 </manifest>
