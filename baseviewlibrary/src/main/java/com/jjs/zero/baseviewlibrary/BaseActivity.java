@@ -129,6 +129,14 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
 
     }
 
+    protected void hideToolBar(){
+        if (getSupportActionBar().isShowing()) getSupportActionBar().hide();
+    }
+
+    protected void setToolBarBg(@DrawableRes int bg) {
+        mToolbar.setBackgroundResource(bg);
+    }
+
     @Override
     public void setTitle(CharSequence title) {
         mBaseBinding.tvCenterTitle.setText(title);
