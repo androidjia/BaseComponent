@@ -8,6 +8,12 @@ android {
             keyAlias 'baseComponent'
             keyPassword '123456'
         }
+        userConfig2 {
+            storeFile file('/Users/junshuai.jia/AndroidStudioProjects/BaseComponent/keynew.keystore')
+            storePassword '123456'
+            keyAlias 'keysnew'
+            keyPassword 'keysnew'
+        }
     }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -39,12 +45,12 @@ android {
         release {
 
 //            //混淆
-            minifyEnabled true
-            zipAlignEnabled true
-            // 移除无用的resource文件
-            shrinkResources true
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
 //            签名
-            signingConfig signingConfigs.userConfig
+            signingConfig signingConfigs.userConfig2
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            debuggable true
             buildConfigField 'String', 'domain', '"http://192.168.0.1:5555/MyProject/"'

@@ -1,3 +1,4 @@
+include ':javaNewlibrary'
 include ':httplibrary'
 include ':modellibrary'
 include ':utilslibrary'

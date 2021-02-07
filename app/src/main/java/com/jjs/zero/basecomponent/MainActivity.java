@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,12 @@ import com.jjs.zero.viewlibrary.ViewBaseActivity;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
@@ -151,15 +157,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         viewBinding.tvView.setOnClickListener(view -> {
             startActivity(new Intent(this, ViewBaseActivity.class));
         });
-
-
-
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.N) {
+            List<Optional<String>> list = Arrays.asList(Optional.empty(),Optional.of("A"));
+            List<String> list1 = list.stream().flatMap(o -> o.isPresent()? Stream.of(o.get()):Stream.empty()).collect(Collectors.toList());
+        }
 
 //          状态栏设置
         StatusBarUtils.setStatusBarColorDark(this,true);
 //        StatusBarUtils.setStatusBarColor(this, Color.BLUE);
         setTitle("statusBar:"+StatusBarUtils.statusBarHeight(this)+"  title:"+StatusBarUtils.titleBarHeight(this));
-
 
 //        byte[] array = new byte[]{(byte) 0x85,(byte) 0xCE,(byte)0xB6,(byte)0xF0,(byte)0xA4};
         byte[] array2 = new byte[]{(byte) 0x85,(byte) 0xff,(byte)0x87,(byte)0xe9,(byte)0xaf};
