@@ -12,7 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
-**/build
 **/.gradle/
 #**/build.gradle
 /.idea

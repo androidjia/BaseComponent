@@ -152,6 +152,9 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:3.14.9"
 
+    //轮播图
+    implementation 'com.github.xiaohaibin:XBanner:1.6.1'
+
     implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
