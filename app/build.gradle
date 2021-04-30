@@ -159,6 +159,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 //    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+//    implementation 'cn.jzvd:jiaozivideoplayer:6.0.0'
 
-
+//    implementation 'com.shuyu:gsyVideoPlayer-java:8.1.2'
+//是否需要ExoPlayer模式
+//    implementation 'com.shuyu:GSYVideoPlayer-exo2:8.1.2'
+    //根据你的需求ijk模式的so
+//    implementation 'com.shuyu:gsyVideoPlayer-armv5:8.1.2'
+//    implementation 'com.shuyu:gsyVideoPlayer-armv7a:8.1.2'
+//    implementation 'com.shuyu:gsyVideoPlayer-arm64:8.1.2'
 }

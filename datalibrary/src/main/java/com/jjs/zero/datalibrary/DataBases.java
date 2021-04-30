@@ -32,7 +32,7 @@ public abstract class DataBases extends RoomDatabase {
 
     public static DataBases getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (Database.class) {
+            synchronized (DataBases.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),DataBases.class,"baseDemo.db")
                             .allowMainThreadQueries()//允许主线程查询
